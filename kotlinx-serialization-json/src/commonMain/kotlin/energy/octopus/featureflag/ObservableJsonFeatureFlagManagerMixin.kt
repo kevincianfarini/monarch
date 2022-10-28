@@ -9,7 +9,7 @@ public class ObservableJsonFeatureFlagManagerMixin(
     private val json: Json,
 ) : ObservableFeatureFlagManagerMixin, FeatureFlagManagerMixin by JsonFeatureFlagManagerMixin(json) {
 
-    public override fun <T : FeatureFlagOption> valuesOrNull(
+    public override fun <T : Any> valuesOrNull(
         flag: FeatureFlag<T>,
         store: ObservableFeatureFlagDataStore
     ): Flow<T>? = when (flag) {

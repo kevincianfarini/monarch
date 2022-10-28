@@ -27,7 +27,7 @@ public interface FeatureFlagManagerMixin {
      * Get the current value for [flag] as [T] from [store]. This function will return null if this
      * [FeatureFlagManagerMixin] does not handle [flag].
      */
-    public suspend fun <T : FeatureFlagOption> currentValueForOrNull(
+    public suspend fun <T : Any> currentValueForOrNull(
         flag: FeatureFlag<T>,
         store: FeatureFlagDataStore,
     ): T?

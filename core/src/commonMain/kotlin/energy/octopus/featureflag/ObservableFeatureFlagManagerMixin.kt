@@ -29,7 +29,7 @@ public interface ObservableFeatureFlagManagerMixin: FeatureFlagManagerMixin {
      * Observes values for [flag] as [Flow<T>] from [store]. This function will return null if this
      * [ObservableFeatureFlagManagerMixin] does not handle [flag].
      */
-    public fun <T : FeatureFlagOption> valuesOrNull(
+    public fun <T : Any> valuesOrNull(
         flag: FeatureFlag<T>,
         store: ObservableFeatureFlagDataStore,
     ): Flow<T>?

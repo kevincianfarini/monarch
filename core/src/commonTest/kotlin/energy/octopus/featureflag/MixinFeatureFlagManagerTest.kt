@@ -11,22 +11,18 @@ class MixinFeatureFlagManagerTest {
     object LongFeature : LongFeatureFlag(key = "long", default = 1027L)
     object ByteArrayFeature : ByteArrayFeatureFlag(key = "byte", default = byteArrayOf(0b1))
 
-    class IntOption(val value: Int) : FeatureFlagOption
-    object IntFeatureFlag : FeatureFlag<IntOption> {
+    object IntFeatureFlag : FeatureFlag<Int> {
         override val key: String get() = "some_int"
-        override val default: IntOption = IntOption(-1)
+        override val default = -1
     }
 
     private val intDecodingMixin = object : FeatureFlagManagerMixin {
-        override suspend fun <T : FeatureFlagOption> currentValueForOrNull(
+        override suspend fun <T : Any> currentValueForOrNull(
             flag: FeatureFlag<T>,
             store: FeatureFlagDataStore,
         ): T? = when (flag) {
             is IntFeatureFlag -> {
-                val value = store.getString(flag.key)?.let { string ->
-                    IntOption(string.toInt())
-                }
-
+                val value = store.getString(flag.key)?.toInt()
                 (value ?: flag.default) as T
             }
             else -> null
@@ -52,7 +48,7 @@ class MixinFeatureFlagManagerTest {
             store.data["foo"] = "bar"
             assertEquals(
                 expected = "bar",
-                actual = manager.currentValueFor(StringFeature).value,
+                actual = manager.currentValueFor(StringFeature),
             )
         }
     }
@@ -61,7 +57,7 @@ class MixinFeatureFlagManagerTest {
         runBlocking {
             assertEquals(
                 expected = "blah",
-                actual = manager.currentValueFor(StringFeature).value,
+                actual = manager.currentValueFor(StringFeature),
             )
         }
     }
@@ -69,13 +65,13 @@ class MixinFeatureFlagManagerTest {
     @Test fun `manager gets boolean value`() {
         runBlocking {
             store.data["bool"] = true
-            assertTrue(manager.currentValueFor(BooleanFeature).isEnabled)
+            assertTrue(manager.currentValueFor(BooleanFeature))
         }
     }
 
     @Test fun `manager gets default boolean value`() {
         runBlocking {
-            assertFalse(manager.currentValueFor(BooleanFeature).isEnabled)
+            assertFalse(manager.currentValueFor(BooleanFeature))
         }
     }
 
@@ -84,7 +80,7 @@ class MixinFeatureFlagManagerTest {
             store.data["double"] = 15.7
             assertEquals(
                 expected = 15.7,
-                actual = manager.currentValueFor(DoubleFeature).value,
+                actual = manager.currentValueFor(DoubleFeature),
                 absoluteTolerance = 0.05,
             )
         }
@@ -94,7 +90,7 @@ class MixinFeatureFlagManagerTest {
         runBlocking {
             assertEquals(
                 expected = 1.5,
-                actual = manager.currentValueFor(DoubleFeature).value,
+                actual = manager.currentValueFor(DoubleFeature),
                 absoluteTolerance = 0.05,
             )
         }
@@ -105,7 +101,7 @@ class MixinFeatureFlagManagerTest {
             store.data["long"] = 27L
             assertEquals(
                 expected = 27L,
-                actual = manager.currentValueFor(LongFeature).value,
+                actual = manager.currentValueFor(LongFeature),
             )
         }
     }
@@ -114,7 +110,7 @@ class MixinFeatureFlagManagerTest {
         runBlocking {
             assertEquals(
                 expected = 1027L,
-                actual = manager.currentValueFor(LongFeature).value,
+                actual = manager.currentValueFor(LongFeature),
             )
         }
     }
@@ -124,7 +120,7 @@ class MixinFeatureFlagManagerTest {
             store.data["byte"] = byteArrayOf(0b11)
             assertContentEquals(
                 expected = byteArrayOf(0b11),
-                actual = manager.currentValueFor(ByteArrayFeature).value,
+                actual = manager.currentValueFor(ByteArrayFeature),
             )
         }
     }
@@ -133,7 +129,7 @@ class MixinFeatureFlagManagerTest {
         runBlocking {
             assertContentEquals(
                 expected = byteArrayOf(0b1),
-                actual = manager.currentValueFor(ByteArrayFeature).value,
+                actual = manager.currentValueFor(ByteArrayFeature),
             )
         }
     }
@@ -143,7 +139,7 @@ class MixinFeatureFlagManagerTest {
             store.data["some_int"] = "1"
             assertEquals(
                 expected = 1,
-                actual = manager.currentValueFor(IntFeatureFlag).value,
+                actual = manager.currentValueFor(IntFeatureFlag),
             )
         }
     }
@@ -151,9 +147,9 @@ class MixinFeatureFlagManagerTest {
     @Test fun `manager errors with unrecognized flag type`() {
         runBlocking {
             // the below IS NOT a `BooleanOption` and therefore will go unrecognized
-            val someRandomFlag = object : FeatureFlag<BooleanOption> {
+            val someRandomFlag = object : FeatureFlag<Boolean> {
                 override val key: String = "random_key"
-                override val default: BooleanOption = BooleanOption(false)
+                override val default = false
             }
 
             assertFailsWith<IllegalArgumentException> {

@@ -7,23 +7,23 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
-public class FakeFeatureFlagManager : FeatureFlagManager, ObservableFeatureFlagManager {
+public class FakeFeatureFlagManager : ObservableFeatureFlagManager {
 
     private val mutex = Mutex()
-    private val store = mutableMapOf<String, MutableStateFlow<FeatureFlagOption>>()
+    private val store = mutableMapOf<String, MutableStateFlow<Any>>()
 
     @Suppress("UNCHECKED_CAST")
-    public override suspend fun <T : FeatureFlagOption> currentValueFor(
+    public override suspend fun <T : Any> currentValueFor(
         flag: FeatureFlag<T>,
     ): T = mutex.withLock {
         (store[flag.key]?.value as? T) ?: flag.default
     }
 
-    public override fun <T : FeatureFlagOption> valuesFor(flag: FeatureFlag<T>): Flow<T> {
+    public override fun <T : Any> valuesFor(flag: FeatureFlag<T>): Flow<T> {
         return (store[flag.key]?.asStateFlow() ?: flowOf(flag.default)) as Flow<T>
     }
 
-    public suspend fun <T : FeatureFlagOption> setCurrentValueFor(
+    public suspend fun <T : Any> setCurrentValueFor(
         flag: FeatureFlag<T>,
         option: T,
     ): Unit = mutex.withLock {

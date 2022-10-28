@@ -5,9 +5,9 @@ import kotlinx.coroutines.flow.Flow
 public interface ObservableFeatureFlagManager : FeatureFlagManager {
 
     /**
-     * Emits changes to [FeatureFlagOption] value of [flag]
+     * Emits value changes of [flag].
      */
-    public fun <T : FeatureFlagOption> valuesFor(
+    public fun <T : Any> valuesFor(
         flag: FeatureFlag<T>,
     ): Flow<T>
 }
