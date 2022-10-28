@@ -1,0 +1,36 @@
+package energy.octopus.featureflag
+
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+
+public class FakeFeatureFlagManager : FeatureFlagManager, ObservableFeatureFlagManager {
+
+    private val mutex = Mutex()
+    private val store = mutableMapOf<String, MutableStateFlow<FeatureFlagOption>>()
+
+    @Suppress("UNCHECKED_CAST")
+    public override suspend fun <T : FeatureFlagOption> currentValueFor(
+        flag: FeatureFlag<T>,
+    ): T = mutex.withLock {
+        (store[flag.key]?.value as? T) ?: flag.default
+    }
+
+    public override fun <T : FeatureFlagOption> valuesFor(flag: FeatureFlag<T>): Flow<T> {
+        return (store[flag.key]?.asStateFlow() ?: flowOf(flag.default)) as Flow<T>
+    }
+
+    public suspend fun <T : FeatureFlagOption> setCurrentValueFor(
+        flag: FeatureFlag<T>,
+        option: T,
+    ): Unit = mutex.withLock {
+        if (store[flag.key] == null) {
+            store[flag.key] = MutableStateFlow(option)
+        } else {
+            store[flag.key]?.value = option
+        }
+    }
+}
