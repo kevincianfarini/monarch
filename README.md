@@ -158,6 +158,36 @@ suspend fun main() {
 }
 ```
 
+Observing custom implementations of `FeatureFlag` requires implementing 
+`ObservableFeatureFlagManagerMixin`. 
+
+```kt
+public class ObservableJsonFeatureFlagManagerMixin(
+    private val json: Json,
+) : ObservableFeatureFlagManagerMixin {
+    
+    public override fun <T : Any> currentValueOrNull(
+        flag: FeatureFlag<T>,
+        store: ObservableFeatureFlagDataStore
+    ): T? { /* omitted */ }
+
+    public override fun <T : FeatureFlagOption> valuesOrNull(
+        flag: FeatureFlag<T>,
+        store: ObservableFeatureFlagDataStore
+    ): Flow<T>? = when (flag) {
+        is JsonFeatureFlag<T> -> callbackFlow {
+            val onValueChanged: ((String?) -> Unit) = {
+                trySend(it?.let { flag.optionFrom(it, json) } ?: flag.default)
+            }
+            val observer = FeatureFlagChangeObserver(onValueChanged = onValueChanged)
+            store.observeString(flag.key, observer)
+            awaitClose { store.removeObserver(flag.key, observer) }
+        }
+        else -> null
+    }
+}
+```
+
 ## License 
 
 ```
