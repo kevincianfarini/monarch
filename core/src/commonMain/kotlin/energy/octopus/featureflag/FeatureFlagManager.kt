@@ -6,9 +6,9 @@ package energy.octopus.featureflag
 public interface FeatureFlagManager {
 
     /**
-     * Get the current [FeatureFlagOption] value of [flag].
+     * Get the current value of [flag].
      */
-    public suspend fun <T : FeatureFlagOption> currentValueFor(
+    public suspend fun <T : Any> currentValueFor(
         flag: FeatureFlag<T>,
     ): T
 }

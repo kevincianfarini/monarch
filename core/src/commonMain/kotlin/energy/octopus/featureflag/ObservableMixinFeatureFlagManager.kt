@@ -21,10 +21,10 @@ public class ObservableMixinFeatureFlagManager(
 ) : ObservableFeatureFlagManager, FeatureFlagManager by MixinFeatureFlagManager(store, mixins) {
 
     @Suppress("UNCHECKED_CAST")
-    public override fun <T : FeatureFlagOption> valuesFor(flag: FeatureFlag<T>): Flow<T> = when (flag) {
+    public override fun <T : Any> valuesFor(flag: FeatureFlag<T>): Flow<T> = when (flag) {
         is BooleanFeatureFlag -> callbackFlow {
             val onValueChanged: ((Boolean?) -> Unit) = {
-                trySend((it?.let(flag::optionFrom) ?: flag.default) as T)
+                trySend((it ?: flag.default) as T)
             }
             val observer = FeatureFlagChangeObserver(onValueChanged = onValueChanged)
             store.observeBoolean(flag.key, observer)
@@ -32,7 +32,7 @@ public class ObservableMixinFeatureFlagManager(
         }
         is StringFeatureFlag -> callbackFlow {
             val onValueChanged: ((String?) -> Unit) = {
-                trySend((it?.let(flag::optionFrom) ?: flag.default) as T)
+                trySend((it ?: flag.default) as T)
             }
             val observer = FeatureFlagChangeObserver(onValueChanged = onValueChanged)
             store.observeString(flag.key, observer)
@@ -40,7 +40,7 @@ public class ObservableMixinFeatureFlagManager(
         }
         is DoubleFeatureFlag -> callbackFlow {
             val onValueChanged: ((Double?) -> Unit) = {
-                trySend((it?.let(flag::optionFrom) ?: flag.default) as T)
+                trySend((it ?: flag.default) as T)
             }
             val observer = FeatureFlagChangeObserver(onValueChanged = onValueChanged)
             store.observeDouble(flag.key, observer)
@@ -48,7 +48,7 @@ public class ObservableMixinFeatureFlagManager(
         }
         is LongFeatureFlag -> callbackFlow {
             val onValueChanged: ((Long?) -> Unit) = {
-                trySend((it?.let(flag::optionFrom) ?: flag.default) as T)
+                trySend((it ?: flag.default) as T)
             }
             val observer = FeatureFlagChangeObserver(onValueChanged = onValueChanged)
             store.observeLong(flag.key, observer)
@@ -56,7 +56,7 @@ public class ObservableMixinFeatureFlagManager(
         }
         is ByteArrayFeatureFlag -> callbackFlow {
             val onValueChanged: ((ByteArray?) -> Unit) = {
-                trySend((it?.let(flag::optionFrom) ?: flag.default) as T)
+                trySend((it ?: flag.default) as T)
             }
             val observer = FeatureFlagChangeObserver(onValueChanged = onValueChanged)
             store.observeByteArray(flag.key, observer)

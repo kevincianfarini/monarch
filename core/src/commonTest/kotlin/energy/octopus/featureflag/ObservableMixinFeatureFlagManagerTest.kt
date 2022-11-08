@@ -14,22 +14,21 @@ class ObservableMixinFeatureFlagManagerTest {
     object LongFeature : LongFeatureFlag(key = "long", default = 1027L)
     object ByteArrayFeature : ByteArrayFeatureFlag(key = "byte", default = byteArrayOf(0b1))
 
-    class IntOption(val value: Int) : FeatureFlagOption
-    object IntFeatureFlag : FeatureFlag<IntOption> {
+    object IntFeatureFlag : FeatureFlag<Int> {
         override val key: String get() = "some_int"
-        override val default: IntOption = IntOption(-1)
+        override val default = -1
     }
 
     // FeatureFlagManager mixin that handles IntFeatureFlags, returns Flow<IntOption>
     private val observableIntDecodingMixin = object : ObservableFeatureFlagManagerMixin {
-        override fun <T : FeatureFlagOption> valuesOrNull(
+        override fun <T : Any> valuesOrNull(
             flag: FeatureFlag<T>,
             store: ObservableFeatureFlagDataStore,
         ): Flow<T>? = when (flag) {
             is IntFeatureFlag -> callbackFlow {
                 // all values stored as strings in this test
                 val onValueChanged: (String?) -> Unit = { str ->
-                    trySend((str?.let { IntOption(it.toInt()) } ?: flag.default) as T)
+                    trySend((str?.toInt() ?: flag.default) as T)
                 }
                 val observer = FeatureFlagChangeObserver(onValueChanged)
                 store.observeString(flag.key, observer)
@@ -37,12 +36,12 @@ class ObservableMixinFeatureFlagManagerTest {
             else -> null
         }
 
-        override suspend fun <T : FeatureFlagOption> currentValueForOrNull(
+        override suspend fun <T : Any> currentValueForOrNull(
             flag: FeatureFlag<T>,
             store: FeatureFlagDataStore
         ): T? = when (flag) {
             is IntFeatureFlag -> {
-                (store.getString(flag.key)?.let { IntOption(it.toInt()) } ?: flag.default ) as T?
+                (store.getString(flag.key) ?: flag.default ) as T?
             }
             else -> null
         }
@@ -86,7 +85,7 @@ class ObservableMixinFeatureFlagManagerTest {
         runBlocking {
             store.data["foo"] = "bar"
             observableManager.valuesFor(StringFeature).test {
-                assertEquals(StringOption("bar").value, awaitItem().value)
+                assertEquals("bar", awaitItem())
                 cancelAndIgnoreRemainingEvents()
             }
         }
@@ -96,7 +95,7 @@ class ObservableMixinFeatureFlagManagerTest {
     fun `manager gets default string value`() {
         runBlocking {
             observableManager.valuesFor(StringFeature).test {
-                assertEquals(StringOption("blah").value, awaitItem().value)
+                assertEquals("blah", awaitItem())
                 cancelAndIgnoreRemainingEvents()
             }
         }
@@ -107,7 +106,7 @@ class ObservableMixinFeatureFlagManagerTest {
         runBlocking {
             store.data["bool"] = true
             observableManager.valuesFor(BooleanFeature).test {
-                assertTrue(awaitItem().isEnabled)
+                assertTrue(awaitItem())
                 cancelAndIgnoreRemainingEvents()
             }
         }
@@ -117,7 +116,7 @@ class ObservableMixinFeatureFlagManagerTest {
     fun `manager gets default boolean value`() {
         runBlocking {
             observableManager.valuesFor(BooleanFeature).test {
-                assertFalse(awaitItem().isEnabled)
+                assertFalse(awaitItem())
                 cancelAndIgnoreRemainingEvents()
             }
         }
@@ -128,7 +127,7 @@ class ObservableMixinFeatureFlagManagerTest {
         runBlocking {
             store.data["double"] = 15.7
             observableManager.valuesFor(DoubleFeature).test {
-                assertEquals(expected = 15.7, actual = awaitItem().value, absoluteTolerance = 0.05)
+                assertEquals(expected = 15.7, actual = awaitItem(), absoluteTolerance = 0.05)
                 cancelAndIgnoreRemainingEvents()
             }
         }
@@ -138,7 +137,7 @@ class ObservableMixinFeatureFlagManagerTest {
     fun `manager gets default double value`() {
         runBlocking {
             observableManager.valuesFor(DoubleFeature).test {
-                assertEquals(expected = 1.5, actual = awaitItem().value, absoluteTolerance = 0.05)
+                assertEquals(expected = 1.5, actual = awaitItem(), absoluteTolerance = 0.05)
                 cancelAndIgnoreRemainingEvents()
             }
         }
@@ -149,7 +148,7 @@ class ObservableMixinFeatureFlagManagerTest {
         runBlocking {
             store.data["long"] = 27L
             observableManager.valuesFor(LongFeature).test {
-                assertEquals(expected = 27L, actual = awaitItem().value)
+                assertEquals(expected = 27L, actual = awaitItem())
                 cancelAndIgnoreRemainingEvents()
             }
         }
@@ -159,7 +158,7 @@ class ObservableMixinFeatureFlagManagerTest {
     fun `manager gets default long value`() {
         runBlocking {
             observableManager.valuesFor(LongFeature).test {
-                assertEquals(expected = 1027L, actual = awaitItem().value)
+                assertEquals(expected = 1027L, actual = awaitItem())
                 cancelAndIgnoreRemainingEvents()
             }
         }
@@ -170,7 +169,7 @@ class ObservableMixinFeatureFlagManagerTest {
         runBlocking {
             store.data["byte"] = byteArrayOf(0b11)
             observableManager.valuesFor(ByteArrayFeature).test {
-                assertContentEquals(expected = byteArrayOf(0b11), actual = awaitItem().value)
+                assertContentEquals(expected = byteArrayOf(0b11), actual = awaitItem())
                 cancelAndIgnoreRemainingEvents()
             }
         }
@@ -180,7 +179,7 @@ class ObservableMixinFeatureFlagManagerTest {
     fun `manager gets default byte array value`() {
         runBlocking {
             observableManager.valuesFor(ByteArrayFeature).test {
-                assertContentEquals(expected = byteArrayOf(0b1), actual = awaitItem().value)
+                assertContentEquals(expected = byteArrayOf(0b1), actual = awaitItem())
                 cancelAndIgnoreRemainingEvents()
             }
         }
@@ -191,7 +190,7 @@ class ObservableMixinFeatureFlagManagerTest {
         runBlocking {
             store.data["some_int"] = "1"
             observableManager.valuesFor(IntFeatureFlag).test {
-                assertEquals(expected = 1, actual = awaitItem().value)
+                assertEquals(expected = 1, actual = awaitItem())
                 cancelAndIgnoreRemainingEvents()
             }
         }
@@ -201,12 +200,13 @@ class ObservableMixinFeatureFlagManagerTest {
     fun `manager errors with unrecognized flag type`() {
         runBlocking {
             // the below IS NOT a `BooleanOption` and therefore will go unrecognized
-            val someRandomFlag = object : FeatureFlag<BooleanOption> {
+            val someRandomFlag = object : FeatureFlag<Boolean> {
                 override val key: String = "random_key"
-                override val default: BooleanOption = BooleanOption(false)
+                override val default = false
             }
-            assertFails { observableManager.valuesFor(someRandomFlag) }.run {
-                assertIs<IllegalArgumentException>(this)
+
+            assertFailsWith<IllegalArgumentException> {
+                observableManager.valuesFor(someRandomFlag)
             }
         }
     }

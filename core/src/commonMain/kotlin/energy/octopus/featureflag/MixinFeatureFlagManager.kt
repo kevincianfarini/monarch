@@ -17,27 +17,27 @@ public class MixinFeatureFlagManager(
 ) : FeatureFlagManager {
 
     @Suppress("UNCHECKED_CAST")
-    public override suspend fun <T : FeatureFlagOption> currentValueFor(
+    public override suspend fun <T : Any> currentValueFor(
         flag: FeatureFlag<T>,
     ): T = when (flag) {
         is BooleanFeatureFlag -> {
-            val value = store.getBoolean(flag.key)?.let(flag::optionFrom)
+            val value = store.getBoolean(flag.key)
             (value ?: flag.default) as T
         }
         is StringFeatureFlag -> {
-            val value = store.getString(flag.key)?.let(flag::optionFrom)
+            val value = store.getString(flag.key)
             (value ?: flag.default) as T
         }
         is DoubleFeatureFlag -> {
-            val value = store.getDouble(flag.key)?.let(flag::optionFrom)
+            val value = store.getDouble(flag.key)
             (value ?: flag.default) as T
         }
         is LongFeatureFlag -> {
-            val value = store.getLong(flag.key)?.let(flag::optionFrom)
+            val value = store.getLong(flag.key)
             (value ?: flag.default) as T
         }
         is ByteArrayFeatureFlag -> {
-            val value = store.getByteArray(flag.key)?.let(flag::optionFrom)
+            val value = store.getByteArray(flag.key)
             (value ?: flag.default) as T
         }
         else -> mixins.firstNotNullOfOrNull { delegate ->

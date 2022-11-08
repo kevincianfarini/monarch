@@ -11,7 +11,4 @@ allprojects {
     repositories {
         mavenCentral()
     }
-    afterEvaluate {
-        extensions.findByType<KotlinTopLevelExtensionConfig>()?.explicitApi()
-    }
 }

@@ -3,7 +3,7 @@ plugins {
 }
 
 kotlin {
-
+    explicitApi()
     jvm()
     ios()
     iosSimulatorArm64()
