@@ -1,5 +1,8 @@
-package energy.octopus.monarch
+package energy.octopus.monarch.mixins
 
+import energy.octopus.monarch.FeatureFlag
+import energy.octopus.monarch.FeatureFlagDataStore
+import energy.octopus.monarch.FeatureFlagManagerMixin
 import kotlinx.serialization.json.Json
 
 public class JsonFeatureFlagManagerMixin(
@@ -11,7 +14,7 @@ public class JsonFeatureFlagManagerMixin(
         store: FeatureFlagDataStore,
     ): T? = when (flag) {
         is JsonFeatureFlag<T> -> {
-            val value = store.getString(flag.key)?.let { flag.optionFrom(it, json) }
+            val value = store.getString(flag.key)?.let { flag.deserialize(it, json) }
             (value ?: flag.default)
         }
         else -> null

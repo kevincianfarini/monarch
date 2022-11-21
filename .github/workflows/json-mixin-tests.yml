@@ -1,0 +1,33 @@
+name: Monarch JSON Mixin Tests
+
+on:
+  pull_request:
+    paths-ignore:
+      - '*.md'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ macOS-latest, ubuntu-18.04 ]
+
+    runs-on: ${{matrix.os}}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-disabled: true
+
+      # JVM Tests
+      - name: Run JVM Tests
+        if: matrix.os == 'ubuntu-18.04'
+        run: ./gradlew :mixin:kotlinx-serialization-json:jvmTest
+
+      # iOS Tests
+      - name: Run iOS Tests
+        if: matrix.os == 'macOS-latest'
+        run: ./gradlew :mixin:kotlinx-serialization-json:iosX64Test
