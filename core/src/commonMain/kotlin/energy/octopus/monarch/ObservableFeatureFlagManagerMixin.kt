@@ -1,4 +1,4 @@
-package energy.octopus.featureflag
+package energy.octopus.monarch
 
 import kotlinx.coroutines.flow.Flow
 

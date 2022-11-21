@@ -1,4 +1,4 @@
-package energy.octopus.featureflag
+package energy.octopus.monarch
 
 public interface FeatureFlag<OptionType : Any> {
 
