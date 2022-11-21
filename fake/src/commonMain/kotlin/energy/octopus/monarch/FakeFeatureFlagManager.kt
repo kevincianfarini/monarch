@@ -19,8 +19,9 @@ public class FakeFeatureFlagManager : ObservableFeatureFlagManager {
         (store[flag.key]?.value as? T) ?: flag.default
     }
 
+    @Suppress("UNCHECKED_CAST")
     public override fun <T : Any> valuesFor(flag: FeatureFlag<T>): Flow<T> {
-        return (store[flag.key]?.asStateFlow() ?: flowOf(flag.default)) as Flow<T>
+        return store.getOrPut(flag.key) { MutableStateFlow(flag.default) }.asStateFlow() as Flow<T>
     }
 
     public suspend fun <T : Any> setCurrentValueFor(

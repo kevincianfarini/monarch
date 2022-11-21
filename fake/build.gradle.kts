@@ -16,5 +16,11 @@ kotlin {
                 api(libs.kotlinx.coroutines.core)
             }
         }
+        val commonTest by getting {
+            dependencies {
+                implementation(libs.kotlin.test)
+                implementation(libs.turbine)
+            }
+        }
     }
 }
