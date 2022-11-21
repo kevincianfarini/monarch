@@ -1,5 +1,6 @@
-package energy.octopus.monarch
+package energy.octopus.monarch.mixins
 
+import energy.octopus.monarch.*
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -15,7 +16,7 @@ public class ObservableJsonFeatureFlagManagerMixin(
     ): Flow<T>? = when (flag) {
         is JsonFeatureFlag<T> -> callbackFlow {
             val onValueChanged: ((String?) -> Unit) = {
-                trySend(it?.let { flag.optionFrom(it, json) } ?: flag.default)
+                trySend(it?.let { flag.deserialize(it, json) } ?: flag.default)
             }
             val observer = FeatureFlagChangeObserver(onValueChanged = onValueChanged)
             store.observeString(flag.key, observer)

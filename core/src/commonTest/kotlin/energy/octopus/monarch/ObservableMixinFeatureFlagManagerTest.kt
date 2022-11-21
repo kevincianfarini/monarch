@@ -41,7 +41,7 @@ class ObservableMixinFeatureFlagManagerTest {
             store: FeatureFlagDataStore
         ): T? = when (flag) {
             is IntFeatureFlag -> {
-                (store.getString(flag.key) ?: flag.default ) as T?
+                (store.getString(flag.key) ?: flag.default) as T?
             }
             else -> null
         }
