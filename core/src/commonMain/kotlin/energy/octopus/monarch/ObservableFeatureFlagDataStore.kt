@@ -1,4 +1,4 @@
-package energy.octopus.featureflag
+package energy.octopus.monarch
 
 /**
  * A generic definition of a raw feature flag datastore that supports observability

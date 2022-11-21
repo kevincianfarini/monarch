@@ -1,4 +1,4 @@
-package energy.octopus.featureflag
+package energy.octopus.monarch
 
 /**
  * Manage the options a [FeatureFlag] can manifest as.

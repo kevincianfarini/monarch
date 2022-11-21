@@ -1,4 +1,4 @@
-package energy.octopus.featureflag
+package energy.octopus.monarch
 
 /**
  * A supplement to [MixinFeatureFlagManager] that allows extension via
