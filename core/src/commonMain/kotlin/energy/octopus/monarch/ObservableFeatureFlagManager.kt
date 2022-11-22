@@ -7,7 +7,5 @@ public interface ObservableFeatureFlagManager : FeatureFlagManager {
     /**
      * Emits value changes of [flag].
      */
-    public fun <T : Any> valuesFor(
-        flag: FeatureFlag<T>,
-    ): Flow<T>
+    public fun <T : Any> valuesFor(flag: FeatureFlag<T>): Flow<T>
 }
