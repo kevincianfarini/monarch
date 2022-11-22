@@ -17,9 +17,7 @@ public class MixinFeatureFlagManager(
 ) : FeatureFlagManager {
 
     @Suppress("UNCHECKED_CAST")
-    public override suspend fun <T : Any> currentValueFor(
-        flag: FeatureFlag<T>,
-    ): T = when (flag) {
+    public override fun <T : Any> currentValueFor(flag: FeatureFlag<T>): T = when (flag) {
         is BooleanFeatureFlag -> {
             val value = store.getBoolean(flag.key)
             (value ?: flag.default) as T

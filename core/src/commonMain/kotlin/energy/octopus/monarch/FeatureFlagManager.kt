@@ -8,7 +8,5 @@ public interface FeatureFlagManager {
     /**
      * Get the current value of [flag].
      */
-    public suspend fun <T : Any> currentValueFor(
-        flag: FeatureFlag<T>,
-    ): T
+    public fun <T : Any> currentValueFor(flag: FeatureFlag<T>): T
 }
