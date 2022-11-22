@@ -3,6 +3,7 @@ package energy.octopus.monarch
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.map
 
 /**
  * A [ObservableFeatureFlagManager] implementation that allows extension via [mixins].
@@ -22,45 +23,20 @@ public class ObservableMixinFeatureFlagManager(
 
     @Suppress("UNCHECKED_CAST")
     public override fun <T : Any> valuesFor(flag: FeatureFlag<T>): Flow<T> = when (flag) {
-        is BooleanFeatureFlag -> callbackFlow {
-            val onValueChanged: ((Boolean?) -> Unit) = {
-                trySend((it ?: flag.default) as T)
-            }
-            val observer = FeatureFlagChangeObserver(onValueChanged = onValueChanged)
-            store.observeBoolean(flag.key, observer)
-            awaitClose { store.removeObserver(flag.key, observer) }
+        is BooleanFeatureFlag -> store.observeBoolean(flag.key).map { value ->
+            (value ?: flag.default) as T
         }
-        is StringFeatureFlag -> callbackFlow {
-            val onValueChanged: ((String?) -> Unit) = {
-                trySend((it ?: flag.default) as T)
-            }
-            val observer = FeatureFlagChangeObserver(onValueChanged = onValueChanged)
-            store.observeString(flag.key, observer)
-            awaitClose { store.removeObserver(flag.key, observer) }
+        is StringFeatureFlag -> store.observeString(flag.key).map { value ->
+            (value ?: flag.default) as T
         }
-        is DoubleFeatureFlag -> callbackFlow {
-            val onValueChanged: ((Double?) -> Unit) = {
-                trySend((it ?: flag.default) as T)
-            }
-            val observer = FeatureFlagChangeObserver(onValueChanged = onValueChanged)
-            store.observeDouble(flag.key, observer)
-            awaitClose { store.removeObserver(flag.key, observer) }
+        is DoubleFeatureFlag -> store.observeDouble(flag.key).map { value ->
+            (value ?: flag.default) as T
         }
-        is LongFeatureFlag -> callbackFlow {
-            val onValueChanged: ((Long?) -> Unit) = {
-                trySend((it ?: flag.default) as T)
-            }
-            val observer = FeatureFlagChangeObserver(onValueChanged = onValueChanged)
-            store.observeLong(flag.key, observer)
-            awaitClose { store.removeObserver(flag.key, observer) }
+        is LongFeatureFlag -> store.observeLong(flag.key).map { value ->
+            (value ?: flag.default) as T
         }
-        is ByteArrayFeatureFlag -> callbackFlow {
-            val onValueChanged: ((ByteArray?) -> Unit) = {
-                trySend((it ?: flag.default) as T)
-            }
-            val observer = FeatureFlagChangeObserver(onValueChanged = onValueChanged)
-            store.observeByteArray(flag.key, observer)
-            awaitClose { store.removeObserver(flag.key, observer) }
+        is ByteArrayFeatureFlag -> store.observeByteArray(flag.key).map { value ->
+            (value ?: flag.default) as T
         }
         else -> mixins.firstNotNullOfOrNull { delegate ->
             delegate.valuesOrNull(flag, store)
