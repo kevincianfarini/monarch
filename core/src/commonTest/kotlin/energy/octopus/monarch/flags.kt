@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package energy.octopus.monarch
 
 import kotlinx.coroutines.flow.Flow
