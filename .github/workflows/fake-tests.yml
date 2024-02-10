@@ -25,9 +25,9 @@ jobs:
       # JVM Tests
       - name: Run JVM Tests
         if: matrix.os == 'ubuntu-latest'
-        run: ./gradlew :fake:jvmTest
+        run: ./gradlew :test:jvmTest
 
       # iOS Tests
       - name: Run iOS Tests
         if: matrix.os == 'macOS-latest'
-        run: ./gradlew :fake:iosX64Test
+        run: ./gradlew :test:iosX64Test

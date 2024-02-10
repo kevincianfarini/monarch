@@ -32,7 +32,7 @@ kotlin {
             implementation(libs.kotlin.test)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.turbine)
-            implementation(project(":fake"))
+            implementation(project(":test"))
         }
     }
 }

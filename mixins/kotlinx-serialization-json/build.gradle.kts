@@ -31,7 +31,7 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
-            implementation(project(":fake"))
+            implementation(project(":test"))
         }
     }
 }
