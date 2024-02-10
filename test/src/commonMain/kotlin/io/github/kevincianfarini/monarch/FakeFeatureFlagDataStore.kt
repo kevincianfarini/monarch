@@ -3,10 +3,11 @@ package io.github.kevincianfarini.monarch
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.update
 
 public class FakeFeatureFlagDataStore : ObservableFeatureFlagDataStore {
 
-    private val store = mutableMapOf<String, MutableStateFlow<Any?>>()
+    private val store = MutableStateFlow<Map<String, Any?>>(emptyMap())
 
     public override fun observeString(key: String): Flow<String?> {
         return getValues(key).map { it as String? }
@@ -49,16 +50,14 @@ public class FakeFeatureFlagDataStore : ObservableFeatureFlagDataStore {
     }
 
     public fun setValue(key: String, value: Any?) {
-        if (store.containsKey(key)) {
-            store[key]?.value = value
-        } else {
-            store[key] = MutableStateFlow(value)
+        store.update { map ->
+            map.plus(key to value)
         }
     }
 
-    private fun getValues(key: String): MutableStateFlow<Any?> {
-        return store.getOrPut(key) { MutableStateFlow(null) }
+    private fun getValues(key: String): Flow<Any?> {
+        return store.map { map -> map[key] }
     }
 
-    private fun getValue(key: String): Any? = store[key]?.value
+    private fun getValue(key: String): Any? = store.value[key]
 }

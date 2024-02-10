@@ -1,15 +1,15 @@
 package io.github.kevincianfarini.monarch
 
 import app.cash.turbine.test
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.runTest
 
 class FakeFeatureFlagManagerTest {
 
     @Test fun `returns default value`() {
-        runBlocking {
+        runTest {
             assertEquals(
                 expected = SomeFlag.default,
                 actual = FakeFeatureFlagManager().currentValueFor(SomeFlag)
@@ -18,7 +18,7 @@ class FakeFeatureFlagManagerTest {
     }
 
     @Test fun `returns explicitly set value`() {
-        runBlocking {
+        runTest {
             val manager = FakeFeatureFlagManager().apply {
                 setCurrentValueFor(SomeFlag, 1L)
             }
@@ -30,7 +30,7 @@ class FakeFeatureFlagManagerTest {
     }
 
     @Test fun `observing returns default value`() {
-        runBlocking {
+        runTest {
             assertEquals(
                 expected = SomeFlag.default,
                 actual = FakeFeatureFlagManager()
@@ -41,7 +41,7 @@ class FakeFeatureFlagManagerTest {
     }
 
     @Test fun `observing emits updates to flags`() {
-        runBlocking {
+        runTest {
             val manager = FakeFeatureFlagManager()
             manager.valuesFor(SomeFlag).test {
                 assertEquals(
