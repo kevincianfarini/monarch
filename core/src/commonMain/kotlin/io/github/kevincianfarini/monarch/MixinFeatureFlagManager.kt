@@ -17,7 +17,7 @@ public class MixinFeatureFlagManager(
 ) : FeatureFlagManager {
 
     @Suppress("UNCHECKED_CAST")
-    public override fun <T : Any> currentValueFor(flag: FeatureFlag<T>): T = when (flag) {
+    public override fun <T : Any> currentValueOf(flag: FeatureFlag<T>): T = when (flag) {
         is BooleanFeatureFlag -> {
             val value = store.getBoolean(flag.key)
             (value ?: flag.default) as T
@@ -39,7 +39,7 @@ public class MixinFeatureFlagManager(
             (value ?: flag.default) as T
         }
         else -> mixins.firstNotNullOfOrNull { delegate ->
-            delegate.currentValueForOrNull(flag, store)
+            delegate.currentValueOfOrNull(flag, store)
         } ?: throw IllegalArgumentException("$flag is not a recognized feature flag.")
     }
 }

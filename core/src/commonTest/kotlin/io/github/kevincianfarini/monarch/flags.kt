@@ -18,7 +18,7 @@ object IntFeatureFlag : FeatureFlag<Int> {
 
 // FeatureFlagManager mixin that handles IntFeatureFlags, returns Flow<IntOption>
 object ObservableIntDecodingMixin : ObservableFeatureFlagManagerMixin {
-    override fun <T : Any> valuesOrNull(
+    override fun <T : Any> valuesOfOrNull(
         flag: FeatureFlag<T>,
         store: ObservableFeatureFlagDataStore,
     ): Flow<T>? = when (flag) {
@@ -28,7 +28,7 @@ object ObservableIntDecodingMixin : ObservableFeatureFlagManagerMixin {
         else -> null
     }
 
-    override fun <T : Any> currentValueForOrNull(
+    override fun <T : Any> currentValueOfOrNull(
         flag: FeatureFlag<T>,
         store: FeatureFlagDataStore
     ): T? = when (flag) {

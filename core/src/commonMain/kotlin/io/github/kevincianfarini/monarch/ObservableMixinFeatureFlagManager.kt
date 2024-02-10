@@ -20,7 +20,7 @@ public class ObservableMixinFeatureFlagManager(
 ) : ObservableFeatureFlagManager, FeatureFlagManager by MixinFeatureFlagManager(store, mixins) {
 
     @Suppress("UNCHECKED_CAST")
-    public override fun <T : Any> valuesFor(flag: FeatureFlag<T>): Flow<T> = when (flag) {
+    public override fun <T : Any> valuesOf(flag: FeatureFlag<T>): Flow<T> = when (flag) {
         is BooleanFeatureFlag -> store.observeBoolean(flag.key).map { value ->
             (value ?: flag.default) as T
         }
@@ -37,7 +37,7 @@ public class ObservableMixinFeatureFlagManager(
             (value ?: flag.default) as T
         }
         else -> mixins.firstNotNullOfOrNull { delegate ->
-            delegate.valuesOrNull(flag, store)
+            delegate.valuesOfOrNull(flag, store)
         } ?: throw IllegalArgumentException("$flag is not a recognized feature flag.")
     }
 }

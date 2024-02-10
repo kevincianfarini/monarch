@@ -12,7 +12,7 @@ class FakeFeatureFlagManagerTest {
         runTest {
             assertEquals(
                 expected = SomeFlag.default,
-                actual = InMemoryFeatureFlagManager().currentValueFor(SomeFlag)
+                actual = InMemoryFeatureFlagManager().currentValueOf(SomeFlag)
             )
         }
     }
@@ -24,7 +24,7 @@ class FakeFeatureFlagManagerTest {
             }
             assertEquals(
                 expected = 1L,
-                actual = manager.currentValueFor(SomeFlag)
+                actual = manager.currentValueOf(SomeFlag)
             )
         }
     }
@@ -34,7 +34,7 @@ class FakeFeatureFlagManagerTest {
             assertEquals(
                 expected = SomeFlag.default,
                 actual = InMemoryFeatureFlagManager()
-                    .valuesFor(SomeFlag)
+                    .valuesOf(SomeFlag)
                     .first(),
             )
         }
@@ -43,7 +43,7 @@ class FakeFeatureFlagManagerTest {
     @Test fun `observing emits updates to flags`() {
         runTest {
             val manager = InMemoryFeatureFlagManager()
-            manager.valuesFor(SomeFlag).test {
+            manager.valuesOf(SomeFlag).test {
                 assertEquals(
                     expected = SomeFlag.default,
                     actual = awaitItem(),
