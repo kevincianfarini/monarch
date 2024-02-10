@@ -5,9 +5,6 @@ plugins {
     alias(libs.plugins.kotlin.serialization) apply false
 }
 
-group = "energy.octopus"
-version = "1.0-SNAPSHOT"
-
 allprojects {
     repositories {
         mavenCentral()
