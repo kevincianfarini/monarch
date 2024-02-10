@@ -10,12 +10,12 @@ public class InMemoryFeatureFlagManager : ObservableFeatureFlagManager {
     private val store = MutableStateFlow<Map<String, Any>>(emptyMap())
 
     @Suppress("UNCHECKED_CAST")
-    public override fun <T : Any> currentValueFor(flag: FeatureFlag<T>): T {
+    public override fun <T : Any> currentValueOf(flag: FeatureFlag<T>): T {
         return (store.value[flag.key] ?: flag.default) as T
     }
 
     @Suppress("UNCHECKED_CAST")
-    public override fun <T : Any> valuesFor(flag: FeatureFlag<T>): Flow<T> {
+    public override fun <T : Any> valuesOf(flag: FeatureFlag<T>): Flow<T> {
         return store.map { map -> (map[flag.key] ?: flag.default) as T }
     }
 

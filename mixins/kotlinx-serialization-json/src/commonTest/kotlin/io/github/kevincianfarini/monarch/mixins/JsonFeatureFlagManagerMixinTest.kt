@@ -10,7 +10,7 @@ import kotlin.test.assertNull
 class JsonFeatureFlagManagerMixinTest {
 
     @Test fun `returns null on unhandled feature flag`() = assertNull(
-        mixin().currentValueForOrNull(
+        mixin().currentValueOfOrNull(
             flag = NotJson,
             store = InMemoryFeatureFlagDataStore(),
         )
@@ -18,7 +18,7 @@ class JsonFeatureFlagManagerMixinTest {
 
     @Test fun `returns default on null value result`() = assertEquals(
         expected = SomeJsonFlag.default,
-        actual = mixin().currentValueForOrNull(
+        actual = mixin().currentValueOfOrNull(
             flag = SomeJsonFlag,
             store = InMemoryFeatureFlagDataStore(),
         )
@@ -33,7 +33,7 @@ class JsonFeatureFlagManagerMixinTest {
         }
         assertEquals(
             expected = Foo(2),
-            actual = mixin().currentValueForOrNull(
+            actual = mixin().currentValueOfOrNull(
                 flag = SomeJsonFlag,
                 store = store,
             )

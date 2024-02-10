@@ -9,7 +9,7 @@ public class JsonFeatureFlagManagerMixin(
     private val json: Json,
 ) : FeatureFlagManagerMixin {
 
-    public override fun <T : Any> currentValueForOrNull(
+    public override fun <T : Any> currentValueOfOrNull(
         flag: FeatureFlag<T>,
         store: FeatureFlagDataStore,
     ): T? = when (flag) {
