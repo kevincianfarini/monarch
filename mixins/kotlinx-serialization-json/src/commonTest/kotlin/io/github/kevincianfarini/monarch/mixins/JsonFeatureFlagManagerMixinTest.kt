@@ -1,7 +1,7 @@
 package io.github.kevincianfarini.monarch.mixins
 
 import io.github.kevincianfarini.monarch.BooleanFeatureFlag
-import io.github.kevincianfarini.monarch.FakeFeatureFlagDataStore
+import io.github.kevincianfarini.monarch.InMemoryFeatureFlagDataStore
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -12,7 +12,7 @@ class JsonFeatureFlagManagerMixinTest {
     @Test fun `returns null on unhandled feature flag`() = assertNull(
         mixin().currentValueForOrNull(
             flag = NotJson,
-            store = FakeFeatureFlagDataStore(),
+            store = InMemoryFeatureFlagDataStore(),
         )
     )
 
@@ -20,12 +20,12 @@ class JsonFeatureFlagManagerMixinTest {
         expected = SomeJsonFlag.default,
         actual = mixin().currentValueForOrNull(
             flag = SomeJsonFlag,
-            store = FakeFeatureFlagDataStore(),
+            store = InMemoryFeatureFlagDataStore(),
         )
     )
 
     @Test fun `returns deserialized value`() {
-        val store = FakeFeatureFlagDataStore().apply {
+        val store = InMemoryFeatureFlagDataStore().apply {
             setValue(
                 key = SomeJsonFlag.key,
                 value = """{"bar":2}""",

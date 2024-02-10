@@ -12,14 +12,14 @@ class FakeFeatureFlagManagerTest {
         runTest {
             assertEquals(
                 expected = SomeFlag.default,
-                actual = FakeFeatureFlagManager().currentValueFor(SomeFlag)
+                actual = InMemoryFeatureFlagManager().currentValueFor(SomeFlag)
             )
         }
     }
 
     @Test fun `returns explicitly set value`() {
         runTest {
-            val manager = FakeFeatureFlagManager().apply {
+            val manager = InMemoryFeatureFlagManager().apply {
                 setCurrentValueFor(SomeFlag, 1L)
             }
             assertEquals(
@@ -33,7 +33,7 @@ class FakeFeatureFlagManagerTest {
         runTest {
             assertEquals(
                 expected = SomeFlag.default,
-                actual = FakeFeatureFlagManager()
+                actual = InMemoryFeatureFlagManager()
                     .valuesFor(SomeFlag)
                     .first(),
             )
@@ -42,7 +42,7 @@ class FakeFeatureFlagManagerTest {
 
     @Test fun `observing emits updates to flags`() {
         runTest {
-            val manager = FakeFeatureFlagManager()
+            val manager = InMemoryFeatureFlagManager()
             manager.valuesFor(SomeFlag).test {
                 assertEquals(
                     expected = SomeFlag.default,

@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 
-public class FakeFeatureFlagManager : ObservableFeatureFlagManager {
+public class InMemoryFeatureFlagManager : ObservableFeatureFlagManager {
 
     private val store = MutableStateFlow<Map<String, Any>>(emptyMap())
 

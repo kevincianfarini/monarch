@@ -8,7 +8,7 @@ class ObservableMixinFeatureFlagManagerTest {
 
     @Test fun `manager gets string value`() {
         runBlocking {
-            val store = FakeFeatureFlagDataStore().apply { setValue("foo", "bar") }
+            val store = InMemoryFeatureFlagDataStore().apply { setValue("foo", "bar") }
             manager(store).valuesFor(StringFeature).test {
                 assertEquals("bar", awaitItem())
                 cancelAndIgnoreRemainingEvents()
@@ -27,7 +27,7 @@ class ObservableMixinFeatureFlagManagerTest {
 
     @Test fun `manager gets boolean value`() {
         runBlocking {
-            val store = FakeFeatureFlagDataStore().apply { setValue("bool", true) }
+            val store = InMemoryFeatureFlagDataStore().apply { setValue("bool", true) }
             manager(store).valuesFor(BooleanFeature).test {
                 assertTrue(awaitItem())
                 cancelAndIgnoreRemainingEvents()
@@ -46,7 +46,7 @@ class ObservableMixinFeatureFlagManagerTest {
 
     @Test fun `manager gets double value`() {
         runBlocking {
-            val store = FakeFeatureFlagDataStore().apply { setValue("double", 15.7) }
+            val store = InMemoryFeatureFlagDataStore().apply { setValue("double", 15.7) }
             manager(store).valuesFor(DoubleFeature).test {
                 assertEquals(expected = 15.7, actual = awaitItem(), absoluteTolerance = 0.05)
                 cancelAndIgnoreRemainingEvents()
@@ -65,7 +65,7 @@ class ObservableMixinFeatureFlagManagerTest {
 
     @Test fun `manager gets long value`() {
         runBlocking {
-            val store = FakeFeatureFlagDataStore().apply { setValue("long", 27L) }
+            val store = InMemoryFeatureFlagDataStore().apply { setValue("long", 27L) }
             manager(store).valuesFor(LongFeature).test {
                 assertEquals(expected = 27L, actual = awaitItem())
                 cancelAndIgnoreRemainingEvents()
@@ -84,7 +84,7 @@ class ObservableMixinFeatureFlagManagerTest {
 
     @Test fun `manager gets byte array value`() {
         runBlocking {
-            val store = FakeFeatureFlagDataStore().apply { setValue("byte", byteArrayOf(0b11)) }
+            val store = InMemoryFeatureFlagDataStore().apply { setValue("byte", byteArrayOf(0b11)) }
             manager(store).valuesFor(ByteArrayFeature).test {
                 assertContentEquals(expected = byteArrayOf(0b11), actual = awaitItem())
                 cancelAndIgnoreRemainingEvents()
@@ -103,7 +103,7 @@ class ObservableMixinFeatureFlagManagerTest {
 
     @Test fun `manager gets mixin value`() {
         runBlocking {
-            val store = FakeFeatureFlagDataStore().apply { setValue("some_int", "1") }
+            val store = InMemoryFeatureFlagDataStore().apply { setValue("some_int", "1") }
             manager(store, listOf(ObservableIntDecodingMixin)).valuesFor(IntFeatureFlag).test {
                 assertEquals(expected = 1, actual = awaitItem())
                 cancelAndIgnoreRemainingEvents()
@@ -126,7 +126,7 @@ class ObservableMixinFeatureFlagManagerTest {
     }
 
     private fun manager(
-        store: ObservableFeatureFlagDataStore = FakeFeatureFlagDataStore(),
+        store: ObservableFeatureFlagDataStore = InMemoryFeatureFlagDataStore(),
         mixins: List<ObservableFeatureFlagManagerMixin> = emptyList(),
     ) = ObservableMixinFeatureFlagManager(store, mixins)
 }

@@ -29,7 +29,7 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
         produceValue: InMemoryFeatureFlagDataStoreOverride.(String) -> Any?
     ) {
         val key = "foo"
-        val delegate = FakeFeatureFlagDataStore().apply { setValue(key, delegateValue) }
+        val delegate = InMemoryFeatureFlagDataStore().apply { setValue(key, delegateValue) }
         val storeOverride = storeOverride(
             initialOverrides = mapOf(key to overrideValue),
             delegate = delegate,
@@ -58,7 +58,7 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
         produceValue: InMemoryFeatureFlagDataStoreOverride.(String) -> Any?
     ) {
         val key = "foo"
-        val delegate = FakeFeatureFlagDataStore().apply { setValue(key, delegateValue) }
+        val delegate = InMemoryFeatureFlagDataStore().apply { setValue(key, delegateValue) }
         val storeOverride = storeOverride(delegate = delegate)
 
         assertEquals(
@@ -85,7 +85,7 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
         produceFlow: InMemoryFeatureFlagDataStoreOverride.(String) -> Flow<*>
     ) = runBlocking {
         val key = "foo"
-        val delegate = FakeFeatureFlagDataStore().apply { setValue(key, delegateValue) }
+        val delegate = InMemoryFeatureFlagDataStore().apply { setValue(key, delegateValue) }
         val storeOverride = storeOverride(
             initialOverrides = mapOf(key to overrideValue),
             delegate = delegate,
@@ -116,7 +116,7 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
         produceFlow: InMemoryFeatureFlagDataStoreOverride.(String) -> Flow<*>
     ) = runBlocking {
         val key = "foo"
-        val delegate = FakeFeatureFlagDataStore().apply { setValue(key, delegateValue) }
+        val delegate = InMemoryFeatureFlagDataStore().apply { setValue(key, delegateValue) }
         val storeOverride = storeOverride(delegate = delegate)
 
         storeOverride.produceFlow(key).test {
@@ -158,6 +158,6 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
 
     private fun storeOverride(
         initialOverrides: Map<String, Any> = emptyMap(),
-        delegate: ObservableFeatureFlagDataStore = FakeFeatureFlagDataStore()
+        delegate: ObservableFeatureFlagDataStore = InMemoryFeatureFlagDataStore()
     ) = InMemoryFeatureFlagDataStoreOverride(delegate, initialOverrides)
 }
