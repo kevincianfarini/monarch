@@ -21,21 +21,11 @@ public class ObservableMixinFeatureFlagManager(
 
     @Suppress("UNCHECKED_CAST")
     public override fun <T : Any> valuesOf(flag: FeatureFlag<T>): Flow<T> = when (flag) {
-        is BooleanFeatureFlag -> store.observeBoolean(flag.key).map { value ->
-            (value ?: flag.default) as T
-        }
-        is StringFeatureFlag -> store.observeString(flag.key).map { value ->
-            (value ?: flag.default) as T
-        }
-        is DoubleFeatureFlag -> store.observeDouble(flag.key).map { value ->
-            (value ?: flag.default) as T
-        }
-        is LongFeatureFlag -> store.observeLong(flag.key).map { value ->
-            (value ?: flag.default) as T
-        }
-        is ByteArrayFeatureFlag -> store.observeByteArray(flag.key).map { value ->
-            (value ?: flag.default) as T
-        }
+        is BooleanFeatureFlag -> store.observeBoolean(flag.key, flag.default) as Flow<T>
+        is StringFeatureFlag -> store.observeString(flag.key, flag.default) as Flow<T>
+        is DoubleFeatureFlag -> store.observeDouble(flag.key, flag.default) as Flow<T>
+        is LongFeatureFlag -> store.observeLong(flag.key, flag.default) as Flow<T>
+        is ByteArrayFeatureFlag -> store.observeByteArray(flag.key, flag.default) as Flow<T>
         else -> mixins.firstNotNullOfOrNull { delegate ->
             delegate.valuesOfOrNull(flag, store)
         } ?: throw IllegalArgumentException("$flag is not a recognized feature flag.")
