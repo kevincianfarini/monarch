@@ -13,9 +13,8 @@ public class JsonFeatureFlagManagerMixin(
         flag: FeatureFlag<T>,
         store: FeatureFlagDataStore,
     ): T? = when (flag) {
-        is JsonFeatureFlag<T> -> {
-            val value = store.getString(flag.key)?.let { flag.deserialize(it, json) }
-            (value ?: flag.default)
+        is JsonFeatureFlag<T> -> store.getString(flag.key, flag.serializedDefault(json)).let { string ->
+            flag.deserialize(string, json)
         }
         else -> null
     }

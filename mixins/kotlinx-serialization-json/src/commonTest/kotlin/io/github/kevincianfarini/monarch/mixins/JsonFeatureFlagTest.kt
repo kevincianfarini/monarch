@@ -19,9 +19,8 @@ class JsonFeatureFlagTest {
 object SomeJsonFlag : JsonFeatureFlag<Foo>(
     key = "some_flag",
     default = Foo(1),
-    deserializer = Foo.serializer(),
+    serializer = Foo.serializer(),
 )
 
-@Serializable data class Foo(
-    val bar: Int,
-)
+@Serializable
+data class Foo(val bar: Int)

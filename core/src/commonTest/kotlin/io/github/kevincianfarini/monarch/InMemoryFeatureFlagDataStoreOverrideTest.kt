@@ -13,11 +13,11 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
 
     @Test fun store_cache_overrides_delegate_synchronous() {
         listOf<Triple<Any, Any, InMemoryFeatureFlagDataStoreOverride.(String) -> Any?>>(
-            Triple(true, false) { getBoolean(it) },
-            Triple("correct", "incorrect") { getString(it) },
-            Triple(1.5, 3.0) { getDouble(it) },
-            Triple(1L, 2L) { getLong(it) },
-            Triple(byteArrayOf(0b1), byteArrayOf(0b0)) { getByteArray(it) }
+            Triple(true, false) { getBoolean(it, false) },
+            Triple("correct", "incorrect") { getString(it, "incorrect") },
+            Triple(1.5, 3.0) { getDouble(it, 3.0) },
+            Triple(1L, 2L) { getLong(it, 2L) },
+            Triple(byteArrayOf(0b1), byteArrayOf(0b0)) { getByteArray(it, byteArrayOf(0b0)) }
         ).forEach { (overrideValue, delegateValue, produceFn) ->
             testCacheOverridesDelegateSynchronousParameterized(overrideValue, delegateValue, produceFn)
         }
@@ -43,11 +43,11 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
 
     @Test fun store_cache_falls_back_to_delegate_synchronous() {
         listOf<Pair<Any, InMemoryFeatureFlagDataStoreOverride.(String) -> Any?>>(
-            Pair(false) { getBoolean(it) },
-            Pair("correct") { getString(it) },
-            Pair(3.0) { getDouble(it) },
-            Pair(2L) { getLong(it) },
-            Pair(byteArrayOf(0b0)) { getByteArray(it) }
+            Pair(false) { getBoolean(it, true) },
+            Pair("correct") { getString(it, "incorrect") },
+            Pair(3.0) { getDouble(it, 1.5) },
+            Pair(2L) { getLong(it, 1L) },
+            Pair(byteArrayOf(0b0)) { getByteArray(it, byteArrayOf(0b1)) }
         ).forEach { (delegateValue, produceFn) ->
             testCacheFallsBackToDelegateSynchronousParameterized(delegateValue, produceFn)
         }
@@ -69,11 +69,11 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
 
     @Test fun store_cache_overrides_delegate_flow() {
         listOf<Triple<Any, Any, InMemoryFeatureFlagDataStoreOverride.(String) -> Flow<*>>>(
-            Triple(true, false) { observeBoolean(it) },
-            Triple("correct", "incorrect") { observeString(it) },
-            Triple(1.5, 3.0) { observeDouble(it) },
-            Triple(1L, 2L) { observeLong(it) },
-            Triple(byteArrayOf(0b1), byteArrayOf(0b0)) { observeByteArray(it) }
+            Triple(true, false) { observeBoolean(it, false) },
+            Triple("correct", "incorrect") { observeString(it, "incorrect") },
+            Triple(1.5, 3.0) { observeDouble(it, 3.0) },
+            Triple(1L, 2L) { observeLong(it, 2L) },
+            Triple(byteArrayOf(0b1), byteArrayOf(0b0)) { observeByteArray(it, byteArrayOf(0b0)) }
         ).forEach { (overrideValue, delegateValue, produceFn) ->
             storeCacheOverridesDelegateFlowParameterized(overrideValue, delegateValue, produceFn)
         }
@@ -101,11 +101,11 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
 
     @Test fun store_cache_falls_back_to_delegate_flow() {
         listOf<Pair<Any, InMemoryFeatureFlagDataStoreOverride.(String) -> Flow<*>>>(
-            Pair(false) { observeBoolean(it) },
-            Pair("correct") { observeString(it) },
-            Pair(3.0) { observeDouble(it) },
-            Pair(2L) { observeLong(it) },
-            Pair(byteArrayOf(0b0)) { observeByteArray(it) }
+            Pair(false) { observeBoolean(it, true) },
+            Pair("correct") { observeString(it, "incorrect") },
+            Pair(3.0) { observeDouble(it, 1.5) },
+            Pair(2L) { observeLong(it, 1L) },
+            Pair(byteArrayOf(0b0)) { observeByteArray(it, byteArrayOf(0b1)) }
         ).forEach { (delegateValue, produceFn) ->
             storeCacheFallsBackToDelegateFlowParameterized(delegateValue, produceFn)
         }
@@ -129,11 +129,11 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
 
     @Test fun writing_to_store_cache_emits_new_value_in_active_flows() {
         listOf<Triple<Any, InMemoryFeatureFlagDataStoreOverride.(String) -> Unit, InMemoryFeatureFlagDataStoreOverride.(String) -> Flow<*>>>(
-            Triple(true, { setBoolean(it, false) }) { observeBoolean(it) },
-            Triple("correct", { setString(it, "also correct") }) { observeString(it) },
-            Triple(1.5, { setDouble(it, 3.0) }) { observeDouble(it) },
-            Triple(1L, { setLong(it, 3L) }) { observeLong(it) },
-            Triple(byteArrayOf(0b1), { setByteArray(it, byteArrayOf(0b0)) }) { observeByteArray(it) }
+            Triple(true, { setBoolean(it, false) }) { observeBoolean(it, true) },
+            Triple("correct", { setString(it, "also correct") }) { observeString(it, "incorrect") },
+            Triple(1.5, { setDouble(it, 3.0) }) { observeDouble(it, 4.5) },
+            Triple(1L, { setLong(it, 3L) }) { observeLong(it, 2L) },
+            Triple(byteArrayOf(0b1), { setByteArray(it, byteArrayOf(0b0)) }) { observeByteArray(it, byteArrayOf(0b101)) }
         ).forEach { (initialValue, newValue, produceFn) ->
             writingToStoreCacheEmitsNewValueParameterized(initialValue, newValue, produceFn)
         }

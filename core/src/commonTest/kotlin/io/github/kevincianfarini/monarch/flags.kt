@@ -22,9 +22,9 @@ object ObservableIntDecodingMixin : ObservableFeatureFlagManagerMixin {
         flag: FeatureFlag<T>,
         store: ObservableFeatureFlagDataStore,
     ): Flow<T>? = when (flag) {
-        is IntFeatureFlag -> store.observeString(flag.key).map { str ->
-            (str?.toInt() ?: flag.default) as T
-        }
+        is IntFeatureFlag -> store.observeString(flag.key, flag.default.toString()).map { str ->
+            str.toInt()
+        } as Flow<T>
         else -> null
     }
 
@@ -32,9 +32,7 @@ object ObservableIntDecodingMixin : ObservableFeatureFlagManagerMixin {
         flag: FeatureFlag<T>,
         store: FeatureFlagDataStore
     ): T? = when (flag) {
-        is IntFeatureFlag -> {
-            (store.getString(flag.key)?.toInt() ?: flag.default) as T?
-        }
+        is IntFeatureFlag -> store.getString(flag.key, flag.default.toString()).toInt() as T
         else -> null
     }
 }
