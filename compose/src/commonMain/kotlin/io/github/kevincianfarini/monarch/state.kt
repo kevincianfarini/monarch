@@ -6,7 +6,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 
 /**
- * Acquire a [State] of [flag] that updates according to the underlying flag's value.
+ * Acquire a [State] of [flag] that updates according to the underlying flag's value. The initial value of the returned
+ * state will be the [FeatureFlag.default].
  */
 @Composable
 public fun <T : Any> ObservableFeatureFlagManager.stateOf(flag: FeatureFlag<T>): State<T> {
