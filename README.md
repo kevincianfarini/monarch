@@ -6,6 +6,14 @@ Monarch is a small, flexible, type safe, and multiplatform abstraction for featu
 > 
 > — [Wikipedia](https://en.wikipedia.org/wiki/Butterfly_effect)
 
+## Integration Support
+
+Monarch offers first party integrations with the following well-known feature flag providers. 
+
+| Provider     | JVM                                                        | Android | iOS | watchOS | tvOS | macOS | linuxX64 | linuxArm64 | mingwX64 |
+|--------------|------------------------------------------------------------|---------|-----|---------|------|-------|----------|------------|----------|
+| LaunchDarkly | [⚠️](https://github.com/kevincianfarini/monarch/issues/31) | ✅       | ❌   | ❌       | ❌    | ❌     | ❌        | ❌          | ❌        |
+
 ## Download
 
 TODO
