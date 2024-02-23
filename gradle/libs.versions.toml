@@ -1,8 +1,12 @@
 [versions]
+agp = "8.2.2"
+android-compileSdk = "34"
+android-minSdk = "21"
 compose = "1.5.12"
 kotlin = "1.9.22"
 kotlinx-coroutines = "1.7.3"
 kotlinx-serialization = "1.6.2"
+launchdarkly-android = "5.0.0"
 turbine = "1.0.0"
 
 [libraries]
@@ -12,9 +16,11 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+launchdarkly-android = { module = "com.launchdarkly:launchdarkly-android-client-sdk", version.ref = "launchdarkly-android" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 [plugins]
+android-library = { id = "com.android.library", version.ref = "agp" }
 compose-plugin = { id = "org.jetbrains.compose", version.ref = "compose" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
