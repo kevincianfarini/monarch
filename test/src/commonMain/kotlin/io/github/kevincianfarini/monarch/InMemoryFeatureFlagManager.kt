@@ -19,7 +19,7 @@ public class InMemoryFeatureFlagManager : ObservableFeatureFlagManager {
         return store.map { map -> (map[flag.key] ?: flag.default) as T }
     }
 
-    public fun <T : Any> setCurrentValueFor(flag: FeatureFlag<T>, option: T) {
+    public fun <T : Any> setCurrentValueOf(flag: FeatureFlag<T>, option: T) {
         store.update { map -> map.plus(flag.key to option) }
     }
 }

@@ -20,7 +20,7 @@ class FakeFeatureFlagManagerTest {
     @Test fun `returns explicitly set value`() {
         runTest {
             val manager = InMemoryFeatureFlagManager().apply {
-                setCurrentValueFor(SomeFlag, 1L)
+                setCurrentValueOf(SomeFlag, 1L)
             }
             assertEquals(
                 expected = 1L,
@@ -48,7 +48,7 @@ class FakeFeatureFlagManagerTest {
                     expected = SomeFlag.default,
                     actual = awaitItem(),
                 )
-                manager.setCurrentValueFor(SomeFlag, 1L)
+                manager.setCurrentValueOf(SomeFlag, 1L)
                 assertEquals(
                     expected = 1L,
                     actual = awaitItem(),
