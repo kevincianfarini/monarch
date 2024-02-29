@@ -1,6 +1,3 @@
-import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
-import com.vanniktech.maven.publish.MavenPublishBaseExtension
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.multiplatform)
@@ -37,8 +34,4 @@ kotlin {
             api(libs.launchdarkly.android)
         }
     }
-}
-
-configure<MavenPublishBaseExtension> {
-    configure(AndroidSingleVariantLibrary())
 }
