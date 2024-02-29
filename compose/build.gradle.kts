@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.compose.plugin)
+    alias(libs.plugins.publish)
 }
 
 kotlin {
