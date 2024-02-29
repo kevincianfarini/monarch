@@ -11,3 +11,8 @@ allprojects {
         google()
     }
 }
+
+tasks.withType<JavaCompile>().configureEach {
+    sourceCompatibility = "11"
+    targetCompatibility = "11"
+}
