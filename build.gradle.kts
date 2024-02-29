@@ -12,7 +12,23 @@ allprojects {
     }
 }
 
-tasks.withType<JavaCompile>().configureEach {
-    sourceCompatibility = "11"
-    targetCompatibility = "11"
+val jvmVersion: Provider<String> = providers.gradleProperty("kotlin.jvm.target")
+
+subprojects {
+    plugins.withType<com.android.build.gradle.BasePlugin>().configureEach {
+        extensions.findByType<com.android.build.gradle.BaseExtension>()?.apply {
+            jvmVersion.map { JavaVersion.toVersion(it) }.orNull?.let {
+                compileOptions {
+                    sourceCompatibility = it
+                    targetCompatibility = it
+                }
+            }
+        }
+    }
+    // Apply kotlinOptions.jvmTarget to subprojects
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+        kotlinOptions {
+            if (jvmVersion.isPresent) jvmTarget = jvmVersion.get()
+        }
+    }
 }
