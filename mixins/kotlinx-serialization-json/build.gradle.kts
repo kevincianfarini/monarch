@@ -1,4 +1,5 @@
 plugins {
+    alias(libs.plugins.dokka)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.publish)
