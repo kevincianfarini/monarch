@@ -19,7 +19,9 @@ kotlin {
     explicitApi()
     jvmToolchain(17)
 
-    androidTarget()
+    androidTarget {
+        publishLibraryVariants("release")
+    }
 
     sourceSets {
         commonMain.dependencies {
