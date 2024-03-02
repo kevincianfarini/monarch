@@ -1,5 +1,6 @@
 package io.github.kevincianfarini.monarch.launchdarkly
 
+import com.launchdarkly.sdk.LDValue
 import com.launchdarkly.sdk.android.LDClientInterface
 import io.github.kevincianfarini.monarch.ObservableFeatureFlagDataStore
 import kotlinx.coroutines.channels.awaitClose
@@ -20,7 +21,11 @@ private class LaunchDarklyFeatureFlagDataStore(
     }
 
     override fun getString(key: String, default: String): String {
-        return client.getValue(key, default)
+        val ldValue = client.jsonValueVariation(key, LDValue.ofNull())
+        return when (ldValue.isNull) {
+            true -> client.getValue(key, default)
+            false -> ldValue.toJsonString()
+        }
     }
 
     override fun getDouble(key: String, default: Double): Double {
