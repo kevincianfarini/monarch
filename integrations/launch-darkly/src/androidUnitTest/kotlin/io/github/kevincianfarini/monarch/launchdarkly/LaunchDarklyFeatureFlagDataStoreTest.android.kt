@@ -15,7 +15,6 @@ import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Future
 
 actual fun sut(): Pair<ObservableFeatureFlagDataStore, MutableLDClientInterface> {
-    error("boo")
     val client = FakeLDClient()
     return Pair(client.asFeatureFlagDataStore(), client)
 }
