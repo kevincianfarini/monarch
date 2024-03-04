@@ -10,6 +10,7 @@ import kotlin.test.*
 class LaunchDarklyFeatureFlagDataStoreTest {
 
     @Test fun unpopulated_boolean_returns_default() {
+        error("boo")
         val (dataStore, _) = sut()
         assertFalse(dataStore.getBoolean("key", false))
     }
@@ -177,7 +178,8 @@ class LaunchDarklyFeatureFlagDataStoreTest {
         val second = Thing(2, 3)
         mutate.setVariation("key", first, Thing.serializer())
         dataStore.observeString("key", "{}").test {
-            assertEquals(first, Json.Default.decodeFromString(Thing.serializer(), awaitItem()))
+            val item = awaitItem()
+            assertEquals(first, Json.Default.decodeFromString(Thing.serializer(), item))
             mutate.setVariation("key", second, Thing.serializer())
             assertEquals(second, Json.Default.decodeFromString(Thing.serializer(), awaitItem()))
         }
