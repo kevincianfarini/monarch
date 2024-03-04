@@ -1,0 +1,223 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>LaunchDarklyClientShim</title>
+<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../../styles/style.css" rel="Stylesheet">
+<link href="../../../../styles/main.css" rel="Stylesheet">
+<link href="../../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+<a class="library-name--link" href="../../../../index.html">
+                            monarch
+                    </a>            </div>
+            <div class="library-version">
+            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":integrations:launch-darkly:dokkaHtmlPartial/iosMain">ios</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="launch-darkly::io.github.kevincianfarini.monarch.launchdarkly/LaunchDarklyClientShim///PointingToDeclaration//-1183143623">
+  <div class="breadcrumbs"><a href="../../index.html">launch-darkly</a><span class="delimiter">/</span><a href="../index.html">io.github.kevincianfarini.monarch.launchdarkly</a><span class="delimiter">/</span><span class="current">LaunchDarklyClientShim</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Launch</span><wbr><span>Darkly</span><wbr><span>Client</span><wbr><span><span>Shim</span></span></h1>
+    <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+      <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-active="" data-toggle=":integrations:launch-darkly:dokkaHtmlPartial/iosMain">ios</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":integrations:launch-darkly:dokkaHtmlPartial/iosMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">LaunchDarklyClientShim</a></div><p class="paragraph">A temporary, experimental shim to allow iOS consumers of Monarch to wire their own LDClient as a data store using <a href="../as-feature-flag-data-store.html">LaunchDarklyClientShim.asFeatureFlagDataStore</a>. This interface will be removed in future versions of this library when future, first-party support of LaunchDarkly is available.</p></div>    </div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION,EXTENSION_PROPERTY,EXTENSION_FUNCTION">Members &amp; Extensions</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="482323470%2FFunctions%2F-1183143623" anchor-label="asFeatureFlagDataStore" id="482323470%2FFunctions%2F-1183143623" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../as-feature-flag-data-store.html"><span>as</span><wbr><span>Feature</span><wbr><span>Flag</span><wbr><span>Data</span><wbr><span><span>Store</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="482323470%2FFunctions%2F-1183143623"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-active="" data-toggle=":integrations:launch-darkly:dokkaHtmlPartial/iosMain">ios</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":integrations:launch-darkly:dokkaHtmlPartial/iosMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html">LaunchDarklyClientShim</a><span class="token punctuation">.</span><a href="../as-feature-flag-data-store.html"><span class="token function">asFeatureFlagDataStore</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../../compose/io.github.kevincianfarini.monarch/-observable-feature-flag-data-store/index.html">ObservableFeatureFlagDataStore</a></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-307055572%2FFunctions%2F-1183143623" anchor-label="boolVariation" id="-307055572%2FFunctions%2F-1183143623" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain"></a>
+          <div class="table-row" data-filterable-current=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="bool-variation.html"><span>bool</span><wbr><span><span>Variation</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-307055572%2FFunctions%2F-1183143623"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-active="" data-toggle=":integrations:launch-darkly:dokkaHtmlPartial/iosMain">ios</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":integrations:launch-darkly:dokkaHtmlPartial/iosMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="bool-variation.html"><span class="token function">boolVariation</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">forKey<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">default<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1307527690%2FFunctions%2F-1183143623" anchor-label="doubleVariation" id="-1307527690%2FFunctions%2F-1183143623" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain"></a>
+          <div class="table-row" data-filterable-current=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="double-variation.html"><span>double</span><wbr><span><span>Variation</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1307527690%2FFunctions%2F-1183143623"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-active="" data-toggle=":integrations:launch-darkly:dokkaHtmlPartial/iosMain">ios</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":integrations:launch-darkly:dokkaHtmlPartial/iosMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="double-variation.html"><span class="token function">doubleVariation</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">forKey<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">default<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="160560794%2FFunctions%2F-1183143623" anchor-label="intVariation" id="160560794%2FFunctions%2F-1183143623" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain"></a>
+          <div class="table-row" data-filterable-current=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="int-variation.html"><span>int</span><wbr><span><span>Variation</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="160560794%2FFunctions%2F-1183143623"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-active="" data-toggle=":integrations:launch-darkly:dokkaHtmlPartial/iosMain">ios</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":integrations:launch-darkly:dokkaHtmlPartial/iosMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="int-variation.html"><span class="token function">intVariation</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">forKey<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">default<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-229074635%2FFunctions%2F-1183143623" anchor-label="jsonStringVariation" id="-229074635%2FFunctions%2F-1183143623" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain"></a>
+          <div class="table-row" data-filterable-current=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="json-string-variation.html"><span>json</span><wbr><span>String</span><wbr><span><span>Variation</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-229074635%2FFunctions%2F-1183143623"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-active="" data-toggle=":integrations:launch-darkly:dokkaHtmlPartial/iosMain">ios</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":integrations:launch-darkly:dokkaHtmlPartial/iosMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="json-string-variation.html"><span class="token function">jsonStringVariation</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">forKey<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">default<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1403081252%2FFunctions%2F-1183143623" anchor-label="observe" id="-1403081252%2FFunctions%2F-1183143623" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain"></a>
+          <div class="table-row" data-filterable-current=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="observe.html"><span><span>observe</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1403081252%2FFunctions%2F-1183143623"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-active="" data-toggle=":integrations:launch-darkly:dokkaHtmlPartial/iosMain">ios</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":integrations:launch-darkly:dokkaHtmlPartial/iosMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="observe.html"><span class="token function">observe</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">owner<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token punctuation">, </span></span><span class="parameter ">handler<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-100096321%2FFunctions%2F-1183143623" anchor-label="stopObserving" id="-100096321%2FFunctions%2F-1183143623" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain"></a>
+          <div class="table-row" data-filterable-current=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="stop-observing.html"><span>stop</span><wbr><span><span>Observing</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-100096321%2FFunctions%2F-1183143623"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-active="" data-toggle=":integrations:launch-darkly:dokkaHtmlPartial/iosMain">ios</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":integrations:launch-darkly:dokkaHtmlPartial/iosMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="stop-observing.html"><span class="token function">stopObserving</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">owner<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1048670858%2FFunctions%2F-1183143623" anchor-label="stringVariation" id="-1048670858%2FFunctions%2F-1183143623" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain"></a>
+          <div class="table-row" data-filterable-current=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="string-variation.html"><span>string</span><wbr><span><span>Variation</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1048670858%2FFunctions%2F-1183143623"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-filterable-set=":integrations:launch-darkly:dokkaHtmlPartial/iosMain" data-active="" data-toggle=":integrations:launch-darkly:dokkaHtmlPartial/iosMain">ios</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":integrations:launch-darkly:dokkaHtmlPartial/iosMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="string-variation.html"><span class="token function">stringVariation</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">forKey<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">default<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
