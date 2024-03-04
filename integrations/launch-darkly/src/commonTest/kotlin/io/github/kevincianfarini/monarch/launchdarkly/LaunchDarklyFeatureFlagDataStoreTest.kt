@@ -3,11 +3,14 @@ package io.github.kevincianfarini.monarch.launchdarkly
 import app.cash.turbine.test
 import io.github.kevincianfarini.monarch.ObservableFeatureFlagDataStore
 import kotlinx.coroutines.test.runTest
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
 import kotlin.test.*
 
 class LaunchDarklyFeatureFlagDataStoreTest {
 
     @Test fun unpopulated_boolean_returns_default() {
+        error("boo")
         val (dataStore, _) = sut()
         assertFalse(dataStore.getBoolean("key", false))
     }
@@ -56,6 +59,14 @@ class LaunchDarklyFeatureFlagDataStoreTest {
         assertFailsWith<NotImplementedError> {
             dataStore.getByteArray("key", byteArrayOf())
         }
+    }
+
+    @Test fun getting_string_from_json_flag_returns_value() {
+        val (dataStore, mutate) = sut()
+        val expected = Thing(1, 2)
+        mutate.setVariation("key", expected, Thing.serializer())
+        val jsonString = dataStore.getString("key", "{}")
+        assertEquals(expected, Json.Default.decodeFromString(Thing.serializer(), jsonString))
     }
 
     @Test fun observing_string_coerces_initial_default_to_null() = runTest {
@@ -160,6 +171,22 @@ class LaunchDarklyFeatureFlagDataStoreTest {
             dataStore.observeByteArray("key", byteArrayOf())
         }
     }
+
+    @Test fun observing_json_string_emits_value_updates() = runTest {
+        val (dataStore, mutate) = sut()
+        val first = Thing(1, 2)
+        val second = Thing(2, 3)
+        mutate.setVariation("key", first, Thing.serializer())
+        dataStore.observeString("key", "{}").test {
+            val item = awaitItem()
+            assertEquals(first, Json.Default.decodeFromString(Thing.serializer(), item))
+            mutate.setVariation("key", second, Thing.serializer())
+            assertEquals(second, Json.Default.decodeFromString(Thing.serializer(), awaitItem()))
+        }
+    }
 }
+
+@Serializable
+private data class Thing(val first: Int, val second: Int)
 
 expect fun sut(): Pair<ObservableFeatureFlagDataStore, MutableLDClientInterface>

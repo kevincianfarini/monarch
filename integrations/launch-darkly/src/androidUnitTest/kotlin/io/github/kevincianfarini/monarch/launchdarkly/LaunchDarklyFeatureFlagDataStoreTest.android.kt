@@ -9,6 +9,8 @@ import com.launchdarkly.sdk.android.LDAllFlagsListener
 import com.launchdarkly.sdk.android.LDClientInterface
 import com.launchdarkly.sdk.android.LDStatusListener
 import io.github.kevincianfarini.monarch.ObservableFeatureFlagDataStore
+import kotlinx.serialization.SerializationStrategy
+import kotlinx.serialization.json.Json
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Future
 
@@ -38,6 +40,10 @@ private class FakeLDClient : LDClientInterface, MutableLDClientInterface {
         return (flagValues[p0] as? String) ?: p1
     }
 
+    override fun jsonValueVariation(p0: String?, p1: LDValue): LDValue {
+        return (flagValues[p0] as? LDValue) ?: p1
+    }
+
     override fun registerFeatureFlagListener(p0: String, p1: FeatureFlagChangeListener) {
         val currentListeners = listeners[p0] ?: emptySet()
         listeners[p0] = currentListeners + p1
@@ -48,8 +54,28 @@ private class FakeLDClient : LDClientInterface, MutableLDClientInterface {
         listeners[p0] = currentListeners - p1
     }
 
-    override fun setVariation(flagKey: String, value: Any) {
+    override fun setVariation(flagKey: String, value: Boolean) {
         flagValues[flagKey] = value
+        listeners[flagKey]?.forEach { it.onFeatureFlagChange(flagKey) }
+    }
+
+    override fun setVariation(flagKey: String, value: String) {
+        flagValues[flagKey] = value
+        listeners[flagKey]?.forEach { it.onFeatureFlagChange(flagKey) }
+    }
+
+    override fun setVariation(flagKey: String, value: Double) {
+        flagValues[flagKey] = value
+        listeners[flagKey]?.forEach { it.onFeatureFlagChange(flagKey) }
+    }
+
+    override fun setVariation(flagKey: String, value: Int) {
+        flagValues[flagKey] = value
+        listeners[flagKey]?.forEach { it.onFeatureFlagChange(flagKey) }
+    }
+
+    override fun <T> setVariation(flagKey: String, value: T, serialzer: SerializationStrategy<T>) {
+        flagValues[flagKey] = LDValue.parse(Json.Default.encodeToString(serialzer, value))
         listeners[flagKey]?.forEach { it.onFeatureFlagChange(flagKey) }
     }
 
@@ -110,10 +136,6 @@ private class FakeLDClient : LDClientInterface, MutableLDClientInterface {
     }
 
     override fun allFlags(): MutableMap<String, LDValue> {
-        TODO("Not yet implemented")
-    }
-
-    override fun jsonValueVariation(p0: String?, p1: LDValue?): LDValue {
         TODO("Not yet implemented")
     }
 

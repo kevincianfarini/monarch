@@ -1,5 +1,6 @@
 package io.github.kevincianfarini.monarch.launchdarkly
 
+import com.launchdarkly.sdk.LDValue
 import com.launchdarkly.sdk.android.LDClientInterface
 import io.github.kevincianfarini.monarch.ObservableFeatureFlagDataStore
 import kotlinx.coroutines.channels.awaitClose
@@ -60,7 +61,13 @@ private inline fun <reified T : Any> LDClientInterface.observeValue(key: String,
 private inline fun <reified T : Any> LDClientInterface.getValue(key: String, default: T): T {
     return when (val clazz = T::class) {
         Boolean::class -> boolVariation(key, default as Boolean) as T
-        String::class -> stringVariation(key, default as String) as T
+        String::class -> {
+            val ldValue = jsonValueVariation(key, LDValue.ofNull())
+            when (ldValue.isNull) {
+                true -> stringVariation(key, default as String)
+                false -> ldValue.toJsonString()
+            } as T
+        }
         Double::class -> doubleVariation(key, default as Double) as T
         Long::class -> intVariation(key, (default as Long).toInt()).toLong() as T
         else -> throw IllegalArgumentException("Illegal type for getValue: $clazz")
