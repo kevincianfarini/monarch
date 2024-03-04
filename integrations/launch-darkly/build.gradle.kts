@@ -19,8 +19,11 @@ android {
 
 kotlin {
     explicitApi()
-    jvmToolchain(17)
+    jvmToolchain(19)
 
+    iosArm64()
+    iosSimulatorArm64()
+    iosX64()
     androidTarget {
         publishLibraryVariants("release")
     }
