@@ -10,7 +10,6 @@ import kotlin.test.*
 class LaunchDarklyFeatureFlagDataStoreTest {
 
     @Test fun unpopulated_boolean_returns_default() {
-        error("boo")
         val (dataStore, _) = sut()
         assertFalse(dataStore.getBoolean("key", false))
     }
