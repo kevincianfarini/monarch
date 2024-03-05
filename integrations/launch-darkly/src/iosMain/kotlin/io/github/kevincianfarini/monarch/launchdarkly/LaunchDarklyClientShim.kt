@@ -18,7 +18,9 @@ public interface LaunchDarklyClientShim {
 
     public fun jsonStringVariation(forKey: String, default: String?): String?
 
-    public fun observe(key: String, owner: Any, handler: () -> Unit)
+    public fun observe(key: String, owner: ObserverOwner, handler: () -> Unit)
 
-    public fun stopObserving(owner: Any)
+    public fun stopObserving(owner: ObserverOwner)
 }
+
+public class ObserverOwner
