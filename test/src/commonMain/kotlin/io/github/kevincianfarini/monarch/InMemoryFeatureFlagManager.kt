@@ -5,6 +5,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 
+/**
+ * An implementation of [ObservableFeatureFlagManager] that allows mutating the value of flags in-memory.
+ */
 public class InMemoryFeatureFlagManager : ObservableFeatureFlagManager {
 
     private val store = MutableStateFlow<Map<String, Any>>(emptyMap())
@@ -19,6 +22,9 @@ public class InMemoryFeatureFlagManager : ObservableFeatureFlagManager {
         return store.map { map -> (map[flag.key] ?: flag.default) as T }
     }
 
+    /**
+     * Set the value of [flag] in this manager instance to [option].
+     */
     public fun <T : Any> setCurrentValueOf(flag: FeatureFlag<T>, option: T) {
         store.update { map -> map.plus(flag.key to option) }
     }

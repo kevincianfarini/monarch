@@ -8,6 +8,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.conflate
 
+/**
+ * Represent this [LaunchDarklyClientShim] as an [ObservableFeatureFlagDataStore].
+ */
 public fun LaunchDarklyClientShim.asFeatureFlagDataStore(): ObservableFeatureFlagDataStore {
     return LaunchDarklyFeatureFlagDataStore(this)
 }

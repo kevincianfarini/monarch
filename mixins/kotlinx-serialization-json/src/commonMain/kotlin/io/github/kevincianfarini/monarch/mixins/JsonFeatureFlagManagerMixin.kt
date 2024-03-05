@@ -5,7 +5,14 @@ import io.github.kevincianfarini.monarch.FeatureFlagDataStore
 import io.github.kevincianfarini.monarch.FeatureFlagManagerMixin
 import kotlinx.serialization.json.Json
 
+/**
+ * An implementation of [FeatureFlagManagerMixin] that adds support for [JsonFeatureFlag] instances.
+ */
 public class JsonFeatureFlagManagerMixin(
+    /**
+     * The [Json] instance used to serialize and deserialze feature flag values. This value should adhere to the JSON
+     * requirements imposed by your [FeatureFlagDataStore] implementation's underlying data source.
+     */
     private val json: Json,
 ) : FeatureFlagManagerMixin {
 

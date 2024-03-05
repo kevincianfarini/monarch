@@ -1,5 +1,10 @@
 package io.github.kevincianfarini.monarch
 
+/**
+ * A strongly typed representation of a feature flag that couples a [key], a [default] value, and a data type.
+ * Feature flag instances can be used to acquire the value that flag represents from a [FeatureFlagManager]
+ * or [ObservableFeatureFlagManager] implementation.
+ */
 public interface FeatureFlag<OptionType : Any> {
 
     /**

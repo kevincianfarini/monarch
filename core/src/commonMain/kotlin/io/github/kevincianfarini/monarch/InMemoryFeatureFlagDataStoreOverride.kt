@@ -3,9 +3,23 @@ package io.github.kevincianfarini.monarch
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 
+/**
+ * An implementation of [ObservableFeatureFlagDataStore] that allows overriding values produced by [delegate] with
+ * values held in memory.
+ *
+ * Values held in memory within instances of this class will be returned in favor of their counterparts returned from
+ * [delegate]. When a specific key is not overriden in memory, then the underlying value from [delegate] is returned.
+ */
 @ExperimentalCoroutinesApi
 public class InMemoryFeatureFlagDataStoreOverride(
+    /**
+     * The underlying data store which this class overrides.
+     */
     private val delegate: ObservableFeatureFlagDataStore,
+
+    /**
+     * The initial map of overrides, keyed by a feature flag's key.
+     */
     initialOverrides: Map<String, Any> = emptyMap()
 ) : ObservableFeatureFlagDataStore {
 
