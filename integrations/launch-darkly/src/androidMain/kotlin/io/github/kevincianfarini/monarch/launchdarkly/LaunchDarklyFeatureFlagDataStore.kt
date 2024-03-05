@@ -8,6 +8,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.conflate
 
+/**
+ * Represent this [LDClientInterface] as an [ObservableFeatureFlagDataStore].
+ */
 public fun LDClientInterface.asFeatureFlagDataStore(): ObservableFeatureFlagDataStore {
     return LaunchDarklyFeatureFlagDataStore(this)
 }

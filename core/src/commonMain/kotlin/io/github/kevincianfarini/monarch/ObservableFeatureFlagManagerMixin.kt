@@ -4,9 +4,10 @@ import kotlinx.coroutines.flow.Flow
 
 /**
  * A supplement to [ObservableMixinFeatureFlagManager] that allows extension via
- * [ObservableFeatureFlagManagerMixin.valuesOfOrNull]. Implementations of this interface
- * can opt to handle 1 or more [FeatureFlag] types. For example, if we want to add a mixin that
- * supports JSON, we could do so with the following code.
+ * [ObservableFeatureFlagManagerMixin.valuesOfOrNull].
+ *
+ * Implementations of this interface can opt to handle 1 or more [FeatureFlag] types. For example, if we want to add a
+ * mixin that supports JSON, we could do so with the following code.
  *
  * ```kt
  * class JsonFeatureFlagMixin : ObservableFeatureFlagMixin {

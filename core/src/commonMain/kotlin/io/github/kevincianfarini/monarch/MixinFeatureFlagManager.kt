@@ -10,8 +10,7 @@ public class MixinFeatureFlagManager(
     private val store: FeatureFlagDataStore,
 
     /**
-     * A list of [FeatureFlagManagerMixin] that can be queried when this manager is unfit to handle the
-     * feature flag query.
+     * A list of [FeatureFlagManagerMixin] that are queried when a flag is not a simple primitive type.
      */
     private val mixins: List<FeatureFlagManagerMixin> = emptyList(),
 ) : FeatureFlagManager {

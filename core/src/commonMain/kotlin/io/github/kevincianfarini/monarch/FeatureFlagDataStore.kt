@@ -1,7 +1,7 @@
 package io.github.kevincianfarini.monarch
 
 /**
- * A generic definition of a raw feature flag datastore.
+ * An underlying store of raw, primitive feature flag values.
  */
 public interface FeatureFlagDataStore {
 

@@ -1,10 +1,10 @@
 package io.github.kevincianfarini.monarch
 
 /**
- * A supplement to [MixinFeatureFlagManager] that allows extension via
- * [FeatureFlagManagerMixin.currentValueOfOrNull]. Implementations of this interface
- * can opt to handle 1 or more [FeatureFlag] types. For example, if we want to add a mixin that
- * supports JSON, we could do so with the following code.
+ * A supplement to [MixinFeatureFlagManager] that allows extension via [FeatureFlagManagerMixin.currentValueOfOrNull].
+ *
+ * Implementations of this interface can opt to handle 1 or more [FeatureFlag] types. For example, if we want to add a
+ * mixin that supports JSON, we could do so with the following code.
  *
  * ```kt
  * class JsonFeatureFlagMixin : FeatureFlagMixin {

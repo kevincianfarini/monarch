@@ -1,7 +1,7 @@
 package io.github.kevincianfarini.monarch
 
 /**
- * Manage the options a [FeatureFlag] can manifest as.
+ * Acquire values from [FeatureFlag] instances.
  */
 public interface FeatureFlagManager {
 

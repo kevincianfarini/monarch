@@ -3,7 +3,7 @@ package io.github.kevincianfarini.monarch
 import kotlinx.coroutines.flow.Flow
 
 /**
- * A generic definition of a raw feature flag datastore that supports observability.
+ * An underlying store of raw, primitive feature flag values that supports observability via [Flow].
  */
 public interface ObservableFeatureFlagDataStore : FeatureFlagDataStore {
 
