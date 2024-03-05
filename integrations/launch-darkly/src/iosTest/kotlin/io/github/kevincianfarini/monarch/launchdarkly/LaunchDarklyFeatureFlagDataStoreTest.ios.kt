@@ -59,18 +59,18 @@ private class FakeLDShim : LaunchDarklyClientShim, MutableLDClientInterface {
         return (flagValues[forKey] as? JsonValue)?.jsonString ?: default
     }
 
-    override fun observe(key: String, owner: Any, handler: () -> Unit) {
+    override fun observe(key: String, owner: ObserverOwner, handler: () -> Unit) {
         listeners.add(FlagListener(key, owner, handler))
     }
 
-    override fun stopObserving(owner: Any) {
+    override fun stopObserving(owner: ObserverOwner) {
         listeners.removeAll { it.owner === owner }
     }
 }
 
 private data class FlagListener(
     val key: String,
-    val owner: Any,
+    val owner: ObserverOwner,
     val handler: () -> Unit,
 )
 
