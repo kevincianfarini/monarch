@@ -7,6 +7,8 @@ module:core
 io.github.kevincianfarini.monarch
 module:test
 io.github.kevincianfarini.monarch
+module:environment-variable
+io.github.kevincianfarini.monarch.environment
 module:launch-darkly
 io.github.kevincianfarini.monarch.launchdarkly
 module:kotlinx-serialization-json
