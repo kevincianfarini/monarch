@@ -92,9 +92,6 @@ public class InMemoryFeatureFlagDataStoreOverride(
     public fun setLong(key: String, value: Long) {
         cache.update { map -> map + Pair(key, value) }
     }
-    public fun setByteArray(key: String, value: ByteArray) {
-        cache.update { map -> map + Pair(key, value) }
-    }
 }
 
 private inline fun <reified T : Any> StateFlow<Map<String, Any>>.getCachedValue(key: String): T? {
