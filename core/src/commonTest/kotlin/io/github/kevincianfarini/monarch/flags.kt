@@ -9,7 +9,6 @@ object StringFeature : StringFeatureFlag(key = "foo", default = "blah")
 object BooleanFeature : BooleanFeatureFlag(key = "bool", default = false)
 object DoubleFeature : DoubleFeatureFlag(key = "double", default = 1.5)
 object LongFeature : LongFeatureFlag(key = "long", default = 1027L)
-object ByteArrayFeature : ByteArrayFeatureFlag(key = "byte", default = byteArrayOf(0b1))
 object IntFeatureFlag : FeatureFlag<Int> {
     override val key: String get() = "some_int"
     override val default = -1

@@ -39,25 +39,4 @@ public class EnvironmentVariableFeatureFlagDataStore internal constructor(
         val long = if (strictlyTyped) env?.toLong() else env?.toLongOrNull()
         return long ?: default
     }
-
-    override fun getByteArray(key: String, default: ByteArray): ByteArray {
-        val env = getEnvironmentVariable(key)
-        val bytes = if (strictlyTyped) env?.decodeHexToByteArray() else env?.decodeHexToByteArrayOrNull()
-        return bytes ?: default
-    }
-}
-
-private fun String.decodeHexToByteArrayOrNull(): ByteArray? = takeIf { it.length % 2 == 0 }?.let { string ->
-    ByteArray(string.length / 2) { index ->
-        val startIndex = index * 2
-        val endIndex = startIndex + 1
-        val byteString = string.substring(startIndex, endIndex + 1)
-        byteString.toByte(16)
-    }
-}
-
-private fun String.decodeHexToByteArray(): ByteArray {
-    return requireNotNull(decodeHexToByteArrayOrNull()) {
-        "The input string $this is not a valid hex string."
-    }
 }

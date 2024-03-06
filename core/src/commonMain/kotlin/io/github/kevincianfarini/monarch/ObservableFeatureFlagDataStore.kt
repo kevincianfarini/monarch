@@ -34,11 +34,4 @@ public interface ObservableFeatureFlagDataStore : FeatureFlagDataStore {
      * time of collection, and will emit again on each subsequent update for [key].
      */
     public fun observeLong(key: String, default: Long): Flow<Long>
-
-    /**
-     * Return a [Flow] which emits updates to a [ByteArray] value associated with [key] if present. When no value is
-     * present for [key], the returned flow will emit [default]. The returned flow initially emits the value at the
-     * time of collection, and will emit again on each subsequent update for [key].
-     */
-    public fun observeByteArray(key: String, default: ByteArray): Flow<ByteArray>
 }

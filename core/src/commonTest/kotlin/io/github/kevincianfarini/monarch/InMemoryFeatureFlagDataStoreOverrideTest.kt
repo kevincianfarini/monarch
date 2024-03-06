@@ -17,7 +17,6 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
             Triple("correct", "incorrect") { getString(it, "incorrect") },
             Triple(1.5, 3.0) { getDouble(it, 3.0) },
             Triple(1L, 2L) { getLong(it, 2L) },
-            Triple(byteArrayOf(0b1), byteArrayOf(0b0)) { getByteArray(it, byteArrayOf(0b0)) }
         ).forEach { (overrideValue, delegateValue, produceFn) ->
             testCacheOverridesDelegateSynchronousParameterized(overrideValue, delegateValue, produceFn)
         }
@@ -47,7 +46,6 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
             Pair("correct") { getString(it, "incorrect") },
             Pair(3.0) { getDouble(it, 1.5) },
             Pair(2L) { getLong(it, 1L) },
-            Pair(byteArrayOf(0b0)) { getByteArray(it, byteArrayOf(0b1)) }
         ).forEach { (delegateValue, produceFn) ->
             testCacheFallsBackToDelegateSynchronousParameterized(delegateValue, produceFn)
         }
@@ -73,7 +71,6 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
             Triple("correct", "incorrect") { observeString(it, "incorrect") },
             Triple(1.5, 3.0) { observeDouble(it, 3.0) },
             Triple(1L, 2L) { observeLong(it, 2L) },
-            Triple(byteArrayOf(0b1), byteArrayOf(0b0)) { observeByteArray(it, byteArrayOf(0b0)) }
         ).forEach { (overrideValue, delegateValue, produceFn) ->
             storeCacheOverridesDelegateFlowParameterized(overrideValue, delegateValue, produceFn)
         }
@@ -105,7 +102,6 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
             Pair("correct") { observeString(it, "incorrect") },
             Pair(3.0) { observeDouble(it, 1.5) },
             Pair(2L) { observeLong(it, 1L) },
-            Pair(byteArrayOf(0b0)) { observeByteArray(it, byteArrayOf(0b1)) }
         ).forEach { (delegateValue, produceFn) ->
             storeCacheFallsBackToDelegateFlowParameterized(delegateValue, produceFn)
         }
@@ -133,7 +129,6 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
             Triple("correct", { setString(it, "also correct") }) { observeString(it, "incorrect") },
             Triple(1.5, { setDouble(it, 3.0) }) { observeDouble(it, 4.5) },
             Triple(1L, { setLong(it, 3L) }) { observeLong(it, 2L) },
-            Triple(byteArrayOf(0b1), { setByteArray(it, byteArrayOf(0b0)) }) { observeByteArray(it, byteArrayOf(0b101)) }
         ).forEach { (initialValue, newValue, produceFn) ->
             writingToStoreCacheEmitsNewValueParameterized(initialValue, newValue, produceFn)
         }

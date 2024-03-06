@@ -1,7 +1,6 @@
 package io.github.kevincianfarini.monarch
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 /**
  * A [ObservableFeatureFlagManager] implementation that allows extension via [mixins].
@@ -25,7 +24,6 @@ public class ObservableMixinFeatureFlagManager(
         is StringFeatureFlag -> store.observeString(flag.key, flag.default) as Flow<T>
         is DoubleFeatureFlag -> store.observeDouble(flag.key, flag.default) as Flow<T>
         is LongFeatureFlag -> store.observeLong(flag.key, flag.default) as Flow<T>
-        is ByteArrayFeatureFlag -> store.observeByteArray(flag.key, flag.default) as Flow<T>
         else -> mixins.firstNotNullOfOrNull { delegate ->
             delegate.valuesOfOrNull(flag, store)
         } ?: throw IllegalArgumentException("$flag is not a recognized feature flag.")

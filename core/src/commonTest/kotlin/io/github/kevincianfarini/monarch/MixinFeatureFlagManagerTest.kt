@@ -52,19 +52,6 @@ class MixinFeatureFlagManagerTest {
         actual = manager().currentValueOf(LongFeature),
     )
 
-    @Test fun `manager gets byte array value`() {
-        val store = InMemoryFeatureFlagDataStore().apply { setValue("byte", byteArrayOf(0b11)) }
-        assertContentEquals(
-            expected = byteArrayOf(0b11),
-            actual = manager(store).currentValueOf(ByteArrayFeature),
-        )
-    }
-
-    @Test fun `manager gets default byte array value`() = assertContentEquals(
-        expected = byteArrayOf(0b1),
-        actual = manager().currentValueOf(ByteArrayFeature),
-    )
-
     @Test fun `manager gets mixin value`() {
         val store = InMemoryFeatureFlagDataStore().apply { setValue("some_int", "1") }
         assertEquals(

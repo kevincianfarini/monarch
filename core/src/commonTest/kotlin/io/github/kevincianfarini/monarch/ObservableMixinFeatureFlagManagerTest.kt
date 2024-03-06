@@ -82,25 +82,6 @@ class ObservableMixinFeatureFlagManagerTest {
         }
     }
 
-    @Test fun `manager gets byte array value`() {
-        runBlocking {
-            val store = InMemoryFeatureFlagDataStore().apply { setValue("byte", byteArrayOf(0b11)) }
-            manager(store).valuesOf(ByteArrayFeature).test {
-                assertContentEquals(expected = byteArrayOf(0b11), actual = awaitItem())
-                cancelAndIgnoreRemainingEvents()
-            }
-        }
-    }
-
-    @Test fun `manager gets default byte array value`() {
-        runBlocking {
-            manager().valuesOf(ByteArrayFeature).test {
-                assertContentEquals(expected = byteArrayOf(0b1), actual = awaitItem())
-                cancelAndIgnoreRemainingEvents()
-            }
-        }
-    }
-
     @Test fun `manager gets mixin value`() {
         runBlocking {
             val store = InMemoryFeatureFlagDataStore().apply { setValue("some_int", "1") }
