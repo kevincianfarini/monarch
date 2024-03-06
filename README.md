@@ -8,7 +8,18 @@ Monarch is a small, flexible, type safe, and multiplatform abstraction for featu
 
 ## Download
 
-TODO
+```toml
+[versions]
+monarch = "0.1.0"
+
+[libraries]
+monarch-compose = { module = "io.github.kevincianfarini.monarch:compose", version.ref = "monarch" }
+monarch-core = { module = "io.github.kevincianfarini.monarch:core", version.ref = "monarch" }
+monarch-integration-environment = { module = "io.github.kevincianfarini.monarch:environment-integration", version.ref = "monarch" }
+monarch-integration-launchdarkly = { module = "io.github.kevincianfarini.monarch:launch-darkly-integration", version.ref = "monarch" }
+monarch-mixin-kotlinxjson = { module = "io.github.kevincianfarini.monarch:kotlinx-serialization-mixin", version.ref = "monarch" }
+monarch-test = { module = "io.github.kevincianfarini.monarch:test", version.ref = "monarch" }
+```
 
 ## Usage 
 
