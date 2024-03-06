@@ -1,11 +1,9 @@
 name: release
 
-# TODO make run only on tags.
 on:
-  pull_request: {}
   push:
-    branches:
-      - trunk
+    tags:
+      - '**'
 
 env:
   GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.daemon=false -Dkotlin.incremental=false"
