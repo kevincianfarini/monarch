@@ -32,7 +32,6 @@ Monarch provides several feature flag types in the 'core' artifact.
 * `LongFeatureFlag`
 * `DoubleFeatureFlag`
 * `StringFeatureFlag`
-* `ByteArrayFeatureFlag`
 
 ### Obtaining values
 

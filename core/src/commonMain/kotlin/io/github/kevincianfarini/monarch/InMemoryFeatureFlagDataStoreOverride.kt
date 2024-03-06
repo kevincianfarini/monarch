@@ -41,10 +41,6 @@ public class InMemoryFeatureFlagDataStoreOverride(
         return cache.getCachedValue<Long>(key) ?: delegate.getLong(key, default)
     }
 
-    public override fun getByteArray(key: String, default: ByteArray): ByteArray {
-        return cache.getCachedValue<ByteArray>(key) ?: delegate.getByteArray(key, default)
-    }
-
     public override fun observeBoolean(key: String, default: Boolean): Flow<Boolean> {
         return cache.observeCachedValue<Boolean>(key).flatMapLatest { cachedValue ->
             when (cachedValue) {
@@ -76,15 +72,6 @@ public class InMemoryFeatureFlagDataStoreOverride(
         return cache.observeCachedValue<Long>(key).flatMapLatest { cachedValue ->
             when (cachedValue) {
                 null -> delegate.observeLong(key, default)
-                else -> flowOf(cachedValue)
-            }
-        }
-    }
-
-    public override fun observeByteArray(key: String, default: ByteArray): Flow<ByteArray> {
-        return cache.observeCachedValue<ByteArray>(key).flatMapLatest { cachedValue ->
-            when (cachedValue) {
-                null -> delegate.observeByteArray(key, default)
                 else -> flowOf(cachedValue)
             }
         }

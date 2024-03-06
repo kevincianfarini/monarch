@@ -35,10 +35,6 @@ private class LaunchDarklyFeatureFlagDataStore(
         return shim.getValue(key, default)
     }
 
-    override fun getByteArray(key: String, default: ByteArray): ByteArray {
-        throw NotImplementedError("LaunchDarkly does not support ByteArray flags.")
-    }
-
     override fun observeString(key: String, default: String): Flow<String> {
         return shim.observeValue(key, default)
     }
@@ -53,10 +49,6 @@ private class LaunchDarklyFeatureFlagDataStore(
 
     override fun observeLong(key: String, default: Long): Flow<Long> {
         return shim.observeValue(key, default)
-    }
-
-    override fun observeByteArray(key: String, default: ByteArray): Flow<ByteArray> {
-        throw NotImplementedError("LaunchDarkly does not support ByteArray flags.")
     }
 }
 

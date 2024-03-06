@@ -35,10 +35,6 @@ private class LaunchDarklyFeatureFlagDataStore(
         return client.getValue(key, default)
     }
 
-    override fun getByteArray(key: String, default: ByteArray): ByteArray {
-        throw NotImplementedError("LaunchDarkly does not support ByteArray flags.")
-    }
-
     override fun observeString(key: String, default: String): Flow<String> = client.observeValue(key, default)
 
     override fun observeBoolean(key: String, default: Boolean): Flow<Boolean> = client.observeValue(key, default)
@@ -46,10 +42,6 @@ private class LaunchDarklyFeatureFlagDataStore(
     override fun observeDouble(key: String, default: Double): Flow<Double> = client.observeValue(key, default)
 
     override fun observeLong(key: String, default: Long): Flow<Long> = client.observeValue(key, default)
-
-    override fun observeByteArray(key: String, default: ByteArray): Flow<ByteArray> {
-        throw NotImplementedError("LaunchDarkly does not support ByteArray flags.")
-    }
 }
 
 private inline fun <reified T : Any> LDClientInterface.observeValue(key: String, default: T): Flow<T> {

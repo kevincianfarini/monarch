@@ -21,7 +21,6 @@ public class MixinFeatureFlagManager(
         is StringFeatureFlag -> store.getString(flag.key, flag.default) as T
         is DoubleFeatureFlag -> store.getDouble(flag.key, flag.default) as T
         is LongFeatureFlag -> store.getLong(flag.key, flag.default) as T
-        is ByteArrayFeatureFlag -> store.getByteArray(flag.key, flag.default) as T
         else -> mixins.firstNotNullOfOrNull { delegate ->
             delegate.currentValueOfOrNull(flag, store)
         } ?: throw IllegalArgumentException("$flag is not a recognized feature flag.")

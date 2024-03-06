@@ -53,13 +53,6 @@ class LaunchDarklyFeatureFlagDataStoreTest {
         assertEquals("non_default", dataStore.getString("key", "default"))
     }
 
-    @Test fun getting_byte_array_errors() = runTest {
-        val (dataStore, _) = sut()
-        assertFailsWith<NotImplementedError> {
-            dataStore.getByteArray("key", byteArrayOf())
-        }
-    }
-
     @Test fun getting_string_from_json_flag_returns_value() {
         val (dataStore, mutate) = sut()
         val expected = Thing(1, 2)
@@ -161,13 +154,6 @@ class LaunchDarklyFeatureFlagDataStoreTest {
             assertEquals(-1L, awaitItem())
             mutate.setVariation("key", 3)
             assertEquals(3L, awaitItem())
-        }
-    }
-
-    @Test fun observing_byte_array_errors() = runTest {
-        val (dataStore, _) = sut()
-        assertFailsWith<NotImplementedError> {
-            dataStore.observeByteArray("key", byteArrayOf())
         }
     }
 

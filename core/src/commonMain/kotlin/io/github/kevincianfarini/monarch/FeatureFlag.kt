@@ -49,11 +49,3 @@ public abstract class LongFeatureFlag(
     public override val key: String,
     public override val default: Long,
 ) : FeatureFlag<Long>
-
-/**
- * A simple [Long] feature flag.
- */
-public abstract class ByteArrayFeatureFlag(
-    public override val key: String,
-    public override val default: ByteArray,
-) : FeatureFlag<ByteArray>

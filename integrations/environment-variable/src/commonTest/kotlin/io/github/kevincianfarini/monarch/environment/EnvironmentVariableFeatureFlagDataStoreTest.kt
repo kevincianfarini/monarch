@@ -93,39 +93,4 @@ class EnvironmentVariableFeatureFlagDataStoreTest {
         val store = EnvironmentVariableFeatureFlagDataStore(strictlyTyped = true) { null }
         assertEquals(0, store.getLong(key = "key", default = 0))
     }
-
-    @Test
-    fun strictly_typed_byte_array_returns_value() {
-        val store = EnvironmentVariableFeatureFlagDataStore(strictlyTyped = true) { "0f00" }
-        assertContentEquals(
-            byteArrayOf(0x0f, 0x00),
-            store.getByteArray(key = "key", default = byteArrayOf())
-        )
-    }
-
-    @Test
-    fun strictly_typed_byte_array_fails() {
-        val store = EnvironmentVariableFeatureFlagDataStore(strictlyTyped = true) { "0f0" }
-        assertFailsWith<IllegalArgumentException> {
-            store.getByteArray(key = "key", default = byteArrayOf())
-        }
-    }
-
-    @Test
-    fun loosely_typed_byte_array_returns_default_on_failure() {
-        val store = EnvironmentVariableFeatureFlagDataStore(strictlyTyped = false) { "0f0" }
-        assertContentEquals(
-            byteArrayOf(),
-            store.getByteArray(key = "key", default = byteArrayOf())
-        )
-    }
-
-    @Test
-    fun no_underlying_value_byte_array_returns_default() {
-        val store = EnvironmentVariableFeatureFlagDataStore(strictlyTyped = true) { null }
-        assertContentEquals(
-            byteArrayOf(),
-            store.getByteArray(key = "key", default = byteArrayOf())
-        )
-    }
 }

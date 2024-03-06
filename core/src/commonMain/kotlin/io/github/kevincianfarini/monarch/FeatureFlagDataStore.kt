@@ -24,9 +24,4 @@ public interface FeatureFlagDataStore {
      * Get the [Long] value associated with [key] if present. Otherwise, return [default].
      */
     public fun getLong(key: String, default: Long): Long
-
-    /**
-     * Get the [ByteArray] value associated with [key] if present. Otherwise, return [default].
-     */
-    public fun getByteArray(key: String, default: ByteArray): ByteArray
 }

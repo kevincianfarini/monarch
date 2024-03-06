@@ -22,10 +22,6 @@ public class InMemoryFeatureFlagDataStore : ObservableFeatureFlagDataStore {
         return store.observeValue(key, default)
     }
 
-    public override fun observeByteArray(key: String, default: ByteArray): Flow<ByteArray> {
-        return store.observeValue(key, default)
-    }
-
     public override fun getBoolean(key: String, default: Boolean): Boolean {
         return store.getValue(key, default)
     }
@@ -39,10 +35,6 @@ public class InMemoryFeatureFlagDataStore : ObservableFeatureFlagDataStore {
     }
 
     public override fun getLong(key: String, default: Long): Long {
-        return store.getValue(key, default)
-    }
-
-    public override fun getByteArray(key: String, default: ByteArray): ByteArray {
         return store.getValue(key, default)
     }
 
