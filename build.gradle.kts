@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
 plugins {
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.dokka)
@@ -30,6 +32,15 @@ subprojects {
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
         kotlinOptions {
             if (jvmVersion.isPresent) jvmTarget = jvmVersion.get()
+        }
+    }
+
+    tasks.withType<AbstractTestTask> {
+        testLogging {
+            exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+            showStandardStreams = true
+            showStackTraces = true
+            events(TestLogEvent.FAILED, TestLogEvent.PASSED, TestLogEvent.SKIPPED)
         }
     }
 }

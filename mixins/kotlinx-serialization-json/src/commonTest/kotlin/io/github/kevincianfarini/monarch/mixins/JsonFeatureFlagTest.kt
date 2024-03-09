@@ -7,7 +7,7 @@ import kotlin.test.assertEquals
 
 class JsonFeatureFlagTest {
 
-    @Test fun `deserializes with supplied serializer`() {
+    @Test fun deserializes_with_supplied_serializer() {
         val jsonString = """{"bar":2}"""
         assertEquals(
             expected = Foo(2),

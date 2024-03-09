@@ -5,6 +5,7 @@ android-minSdk = "21"
 compose = "1.6.0"
 dokka = "1.9.10"
 kotlin = "1.9.22"
+kotlin-nodejs = "18.16.12-pre.634"
 kotlinx-coroutines = "1.8.0"
 kotlinx-serialization = "1.6.2"
 launchdarkly-android = "5.0.0"
@@ -13,6 +14,7 @@ turbine = "1.0.0"
 
 [libraries]
 compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "compose" }
+kotlin-nodejs = { module = "org.jetbrains.kotlin-wrappers:kotlin-node", version.ref = "kotlin-nodejs" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
