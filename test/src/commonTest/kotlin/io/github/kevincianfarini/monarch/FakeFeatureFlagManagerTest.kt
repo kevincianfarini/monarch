@@ -8,7 +8,7 @@ import kotlinx.coroutines.test.runTest
 
 class FakeFeatureFlagManagerTest {
 
-    @Test fun `returns default value`() {
+    @Test fun returns_default_value() {
         runTest {
             assertEquals(
                 expected = SomeFlag.default,
@@ -17,7 +17,7 @@ class FakeFeatureFlagManagerTest {
         }
     }
 
-    @Test fun `returns explicitly set value`() {
+    @Test fun returns_explicitly_set_value() {
         runTest {
             val manager = InMemoryFeatureFlagManager().apply {
                 setCurrentValueOf(SomeFlag, 1L)
@@ -29,7 +29,7 @@ class FakeFeatureFlagManagerTest {
         }
     }
 
-    @Test fun `observing returns default value`() {
+    @Test fun observing_returns_default_value() {
         runTest {
             assertEquals(
                 expected = SomeFlag.default,
@@ -40,7 +40,7 @@ class FakeFeatureFlagManagerTest {
         }
     }
 
-    @Test fun `observing emits updates to flags`() {
+    @Test fun observing_emits_updates_to_flags() {
         runTest {
             val manager = InMemoryFeatureFlagManager()
             manager.valuesOf(SomeFlag).test {

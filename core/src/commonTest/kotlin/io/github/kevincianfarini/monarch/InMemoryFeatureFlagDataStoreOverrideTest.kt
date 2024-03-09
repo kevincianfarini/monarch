@@ -3,7 +3,7 @@ package io.github.kevincianfarini.monarch
 import app.cash.turbine.test
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
@@ -80,7 +80,7 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
         overrideValue: Any,
         delegateValue: Any,
         produceFlow: InMemoryFeatureFlagDataStoreOverride.(String) -> Flow<*>
-    ) = runBlocking {
+    ) = runTest {
         val key = "foo"
         val delegate = InMemoryFeatureFlagDataStore().apply { setValue(key, delegateValue) }
         val storeOverride = storeOverride(
@@ -110,7 +110,7 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
     private fun storeCacheFallsBackToDelegateFlowParameterized(
         delegateValue: Any,
         produceFlow: InMemoryFeatureFlagDataStoreOverride.(String) -> Flow<*>
-    ) = runBlocking {
+    ) = runTest {
         val key = "foo"
         val delegate = InMemoryFeatureFlagDataStore().apply { setValue(key, delegateValue) }
         val storeOverride = storeOverride(delegate = delegate)
@@ -138,7 +138,7 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
         initialValue: Any,
         setNewValue: InMemoryFeatureFlagDataStoreOverride.(String) -> Unit,
         produceFlow: InMemoryFeatureFlagDataStoreOverride.(String) -> Flow<*>
-    ) = runBlocking {
+    ) = runTest {
         val key = "foo"
         val storeOverride = storeOverride(initialOverrides = mapOf(key to initialValue))
         storeOverride.produceFlow(key).test {

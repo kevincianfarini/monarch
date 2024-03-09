@@ -9,14 +9,14 @@ import kotlin.test.assertNull
 
 class JsonFeatureFlagManagerMixinTest {
 
-    @Test fun `returns null on unhandled feature flag`() = assertNull(
+    @Test fun returns_null_on_unhandled_feature_flag() = assertNull(
         mixin().currentValueOfOrNull(
             flag = NotJson,
             store = InMemoryFeatureFlagDataStore(),
         )
     )
 
-    @Test fun `returns default on null value result`() = assertEquals(
+    @Test fun returns_default_on_null_value_result() = assertEquals(
         expected = SomeJsonFlag.default,
         actual = mixin().currentValueOfOrNull(
             flag = SomeJsonFlag,
@@ -24,7 +24,7 @@ class JsonFeatureFlagManagerMixinTest {
         )
     )
 
-    @Test fun `returns deserialized value`() {
+    @Test fun returns_deserialized_value() {
         val store = InMemoryFeatureFlagDataStore().apply {
             setValue(
                 key = SomeJsonFlag.key,

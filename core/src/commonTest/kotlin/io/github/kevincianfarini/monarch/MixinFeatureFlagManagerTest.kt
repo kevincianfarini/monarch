@@ -4,7 +4,7 @@ import kotlin.test.*
 
 class MixinFeatureFlagManagerTest {
 
-    @Test fun `manager gets string value`() {
+    @Test fun manager_gets_string_value() {
         val store = InMemoryFeatureFlagDataStore().apply { setValue("foo", "bar") }
         assertEquals(
             expected = "bar",
@@ -12,19 +12,19 @@ class MixinFeatureFlagManagerTest {
         )
     }
 
-    @Test fun `manager gets default string value`() = assertEquals(
+    @Test fun manager_gets_default_string_value() = assertEquals(
         expected = "blah",
         actual = manager().currentValueOf(StringFeature),
     )
 
-    @Test fun `manager gets boolean value`() {
+    @Test fun manager_gets_boolean_value() {
         val store = InMemoryFeatureFlagDataStore().apply { setValue("bool", true) }
         assertTrue(manager(store).currentValueOf(BooleanFeature))
     }
 
-    @Test fun `manager gets default boolean value`() = assertFalse(manager().currentValueOf(BooleanFeature))
+    @Test fun manager_gets_default_boolean_value() = assertFalse(manager().currentValueOf(BooleanFeature))
 
-    @Test fun `manager gets double value`() {
+    @Test fun manager_gets_double_value() {
         val store = InMemoryFeatureFlagDataStore().apply { setValue("double", 15.7) }
         assertEquals(
             expected = 15.7,
@@ -33,13 +33,13 @@ class MixinFeatureFlagManagerTest {
         )
     }
 
-    @Test fun `manager gets default double value`() = assertEquals(
+    @Test fun manager_gets_default_double_value() = assertEquals(
         expected = 1.5,
         actual = manager().currentValueOf(DoubleFeature),
         absoluteTolerance = 0.05,
     )
 
-    @Test fun `manager gets long value`() {
+    @Test fun manager_gets_long_value() {
         val store = InMemoryFeatureFlagDataStore().apply { setValue("long", 27L) }
         assertEquals(
             expected = 27L,
@@ -47,12 +47,12 @@ class MixinFeatureFlagManagerTest {
         )
     }
 
-    @Test fun `manager gets default long value`() = assertEquals(
+    @Test fun manager_gets_default_long_value() = assertEquals(
         expected = 1027L,
         actual = manager().currentValueOf(LongFeature),
     )
 
-    @Test fun `manager gets mixin value`() {
+    @Test fun manager_gets_mixin_value() {
         val store = InMemoryFeatureFlagDataStore().apply { setValue("some_int", "1") }
         assertEquals(
             expected = 1,
@@ -60,7 +60,7 @@ class MixinFeatureFlagManagerTest {
         )
     }
 
-    @Test fun `manager errors with unrecognized flag type`() {
+    @Test fun manager_errors_with_unrecognized_flag_type() {
         // the below IS NOT a `BooleanOption` and therefore will go unrecognized
         val someRandomFlag = object : FeatureFlag<Boolean> {
             override val key: String = "random_key"
