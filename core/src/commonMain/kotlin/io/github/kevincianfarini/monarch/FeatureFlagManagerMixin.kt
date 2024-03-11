@@ -9,7 +9,7 @@ package io.github.kevincianfarini.monarch
  * ```kt
  * class JsonFeatureFlagMixin : FeatureFlagMixin {
  *
- *   override suspend fun <T : FeatureFlagOption> currentValueForOrNull(
+ *   override fun <T : FeatureFlagOption> currentValueOfOrNull(
  *     flag: FeatureFlag<T>,
  *     store: FeatureFlagDataStore,
  *   ): T? = when (flag) {
@@ -17,7 +17,7 @@ package io.github.kevincianfarini.monarch
  *     else -> null
  *   }
  *
- *   abstract suspend fun <T : FeatureFlagOption> decodeJson(flag: FeatureFlag<T>): T
+ *   abstract fun <T : FeatureFlagOption> decodeJson(flag: FeatureFlag<T>): T
  * }
  * ```
  */
