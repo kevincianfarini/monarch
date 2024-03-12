@@ -1,8 +1,6 @@
 package io.github.kevincianfarini.monarch.launchdarkly
 
 import io.github.kevincianfarini.monarch.ObservableFeatureFlagDataStore
-import kotlinx.serialization.SerializationStrategy
-import kotlinx.serialization.json.Json
 
 actual fun sut(): Pair<ObservableFeatureFlagDataStore, MutableLDClientInterface> {
     val client = FakeLDShim()
@@ -34,11 +32,6 @@ private class FakeLDShim : LaunchDarklyClientShim, MutableLDClientInterface {
         listeners.filter { it.key == flagKey }.forEach { it.handler() }
     }
 
-    override fun <T> setVariation(flagKey: String, value: T, serialzer: SerializationStrategy<T>) {
-        flagValues[flagKey] = JsonValue(Json.Default.encodeToString(serialzer, value))
-        listeners.filter { it.key == flagKey }.forEach { it.handler() }
-    }
-
     override fun boolVariation(forKey: String, default: Boolean): Boolean {
         return (flagValues[forKey] as? Boolean) ?: default
     }
@@ -55,10 +48,6 @@ private class FakeLDShim : LaunchDarklyClientShim, MutableLDClientInterface {
         return (flagValues[forKey] as? String) ?: default
     }
 
-    override fun jsonStringVariation(forKey: String, default: String?): String? {
-        return (flagValues[forKey] as? JsonValue)?.jsonString ?: default
-    }
-
     override fun observe(key: String, owner: ObserverOwner, handler: () -> Unit) {
         listeners.add(FlagListener(key, owner, handler))
     }
@@ -73,5 +62,3 @@ private data class FlagListener(
     val owner: ObserverOwner,
     val handler: () -> Unit,
 )
-
-private class JsonValue(val jsonString: String)

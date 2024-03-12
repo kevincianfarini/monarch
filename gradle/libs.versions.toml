@@ -8,7 +8,7 @@ kotlin = "1.9.22"
 kotlin-nodejs = "18.16.12-pre.634"
 kotlinx-coroutines = "1.8.0"
 kotlinx-serialization = "1.6.2"
-launchdarkly-android = "5.0.0"
+launchdarkly-android = "5.0.5"
 publish = "0.27.0"
 turbine = "1.0.0"
 
