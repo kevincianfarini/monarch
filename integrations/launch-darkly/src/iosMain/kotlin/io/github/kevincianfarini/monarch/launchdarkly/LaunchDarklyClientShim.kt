@@ -29,11 +29,6 @@ public interface LaunchDarklyClientShim {
     public fun stringVariation(forKey: String, default: String): String
 
     /**
-     * Return a JSON encoded [String] value [forKey], or [default] if no value exists.
-     */
-    public fun jsonStringVariation(forKey: String, default: String?): String?
-
-    /**
      * Register a [handler] to be invoked when the value associated with [key] changes, scoped
      * to [owner].
      */

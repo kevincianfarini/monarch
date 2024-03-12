@@ -68,13 +68,7 @@ private inline fun <reified T : Any> LaunchDarklyClientShim.observeValue(key: St
 private inline fun <reified T : Any> LaunchDarklyClientShim.getValue(key: String, default: T): T {
     return when (val clazz = T::class) {
         Boolean::class -> boolVariation(key, default as Boolean) as T
-        String::class -> {
-            val jsonString = jsonStringVariation(key, null)
-            when (jsonString) {
-                null -> stringVariation(key, default as String)
-                else -> jsonString
-            } as T
-        }
+        String::class -> stringVariation(key, default as String) as T
         Double::class -> doubleVariation(key, default as Double) as T
         Long::class -> intVariation(key, (default as Long).toInt()).toLong() as T
         else -> throw IllegalArgumentException("Illegal type for getValue: $clazz")

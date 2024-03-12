@@ -9,8 +9,6 @@ import com.launchdarkly.sdk.android.LDAllFlagsListener
 import com.launchdarkly.sdk.android.LDClientInterface
 import com.launchdarkly.sdk.android.LDStatusListener
 import io.github.kevincianfarini.monarch.ObservableFeatureFlagDataStore
-import kotlinx.serialization.SerializationStrategy
-import kotlinx.serialization.json.Json
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Future
 
@@ -71,11 +69,6 @@ private class FakeLDClient : LDClientInterface, MutableLDClientInterface {
 
     override fun setVariation(flagKey: String, value: Int) {
         flagValues[flagKey] = value
-        listeners[flagKey]?.forEach { it.onFeatureFlagChange(flagKey) }
-    }
-
-    override fun <T> setVariation(flagKey: String, value: T, serialzer: SerializationStrategy<T>) {
-        flagValues[flagKey] = LDValue.parse(Json.Default.encodeToString(serialzer, value))
         listeners[flagKey]?.forEach { it.onFeatureFlagChange(flagKey) }
     }
 
