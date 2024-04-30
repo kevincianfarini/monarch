@@ -10,7 +10,7 @@ Monarch is a small, flexible, type safe, and multiplatform abstraction for featu
 
 ```toml
 [versions]
-monarch = "0.1.0"
+monarch = "0.2.2"
 
 [libraries]
 monarch-compose = { module = "io.github.kevincianfarini.monarch:compose", version.ref = "monarch" }
