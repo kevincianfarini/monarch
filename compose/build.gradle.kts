@@ -13,15 +13,6 @@ kotlin {
     iosSimulatorArm64()
     iosX64()
     jvm()
-    js {
-        nodejs {
-            testTask {
-                useMocha {
-                    timeout = "5s"
-                }
-            }
-        }
-    }
     linuxArm64()
     linuxX64()
     macosArm64()
@@ -39,6 +30,13 @@ kotlin {
         commonMain.dependencies {
             api(libs.compose.runtime)
             api(project(":core"))
+        }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(libs.kotlinx.coroutines.test)
+            implementation(libs.molecule)
+            implementation(libs.turbine)
+            implementation(project(":test"))
         }
     }
 }
