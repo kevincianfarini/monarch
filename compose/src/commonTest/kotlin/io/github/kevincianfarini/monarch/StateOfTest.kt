@@ -18,7 +18,7 @@ class StateOfTest {
         val flow = moleculeFlow(RecompositionMode.Immediate) {
             manager.stateOf(SomeBooleanFlag).value
         }
-        flow.test { assertTrue(awaitItem()) }
+        flow.collect { assertTrue(it) }
     }
 
     @Test
