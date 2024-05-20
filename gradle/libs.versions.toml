@@ -10,7 +10,7 @@ kotlinx-coroutines = "1.8.0"
 kotlinx-serialization = "1.6.2"
 launchdarkly-android = "5.0.5"
 molecule = "1.4.3"
-publish = "0.27.0"
+publish = "0.28.0"
 turbine = "1.1.0"
 
 [libraries]
