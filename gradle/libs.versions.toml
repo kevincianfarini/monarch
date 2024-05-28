@@ -4,7 +4,7 @@ android-compileSdk = "34"
 android-minSdk = "21"
 compose = "1.6.2"
 dokka = "1.9.20"
-kotlin = "1.9.23"
+kotlin = "2.0.0"
 kotlin-nodejs = "18.16.12-pre.634"
 kotlinx-coroutines = "1.8.1"
 kotlinx-serialization = "1.6.3"
@@ -27,8 +27,8 @@ turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 [plugins]
 android-library = { id = "com.android.library", version.ref = "agp" }
-compose-plugin = { id = "org.jetbrains.compose", version.ref = "compose" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 publish = { id = "com.vanniktech.maven.publish", version.ref = "publish" }
