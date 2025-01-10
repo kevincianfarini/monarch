@@ -49,13 +49,13 @@ kotlin {
 private fun KotlinNativeTarget.configureSpmInterop() {
     compilations {
         val main by getting {
-            cinterops.create("launch-darkly")
+            cinterops.create("launchdarkly")
         }
     }
 }
 
 swiftPackageConfig {
-    create("launch-darkly") {
+    create("launchdarkly") {
         dependency(
             SwiftDependency.Package.Remote.Version(
                 url = "https://github.com/launchdarkly/ios-client-sdk.git",
