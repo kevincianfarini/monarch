@@ -3,3 +3,4 @@
 **/build/
 local.properties
 .kotlin
+integrations/launch-darkly/exportedLaunch-darkly/
