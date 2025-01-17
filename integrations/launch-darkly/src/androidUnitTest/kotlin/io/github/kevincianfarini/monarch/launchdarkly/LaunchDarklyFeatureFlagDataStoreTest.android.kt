@@ -27,7 +27,7 @@ private class FakeLDClient : LDClientInterface, MutableLDClientInterface {
     }
 
     override fun intVariation(p0: String, p1: Int): Int {
-        return (flagValues[p0] as? Int) ?: p1
+        return (flagValues[p0] as? Long)?.toInt() ?: p1
     }
 
     override fun doubleVariation(p0: String, p1: Double): Double {
@@ -67,7 +67,7 @@ private class FakeLDClient : LDClientInterface, MutableLDClientInterface {
         listeners[flagKey]?.forEach { it.onFeatureFlagChange(flagKey) }
     }
 
-    override fun setVariation(flagKey: String, value: Int) {
+    override fun setVariation(flagKey: String, value: Long) {
         flagValues[flagKey] = value
         listeners[flagKey]?.forEach { it.onFeatureFlagChange(flagKey) }
     }

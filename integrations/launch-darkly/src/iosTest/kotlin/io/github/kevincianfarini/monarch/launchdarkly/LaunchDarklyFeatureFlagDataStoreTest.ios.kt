@@ -4,7 +4,7 @@ import io.github.kevincianfarini.monarch.ObservableFeatureFlagDataStore
 
 actual fun sut(): Pair<ObservableFeatureFlagDataStore, MutableLDClientInterface> {
     val client = FakeLDShim()
-    return Pair(client.asFeatureFlagDataStore(), client)
+    return Pair(LaunchDarklyFeatureFlagDataStore(client), client)
 }
 
 private class FakeLDShim : LaunchDarklyClientShim, MutableLDClientInterface {
@@ -27,7 +27,7 @@ private class FakeLDShim : LaunchDarklyClientShim, MutableLDClientInterface {
         listeners.filter { it.key == flagKey }.forEach { it.handler() }
     }
 
-    override fun setVariation(flagKey: String, value: Int) {
+    override fun setVariation(flagKey: String, value: Long) {
         flagValues[flagKey] = value
         listeners.filter { it.key == flagKey }.forEach { it.handler() }
     }
@@ -36,8 +36,8 @@ private class FakeLDShim : LaunchDarklyClientShim, MutableLDClientInterface {
         return (flagValues[forKey] as? Boolean) ?: default
     }
 
-    override fun intVariation(forKey: String, default: Int): Int {
-        return (flagValues[forKey] as? Int) ?: default
+    override fun longVariation(forKey: String, default: Long): Long {
+        return (flagValues[forKey] as? Long) ?: default
     }
 
     override fun doubleVariation(forKey: String, default: Double): Double {
