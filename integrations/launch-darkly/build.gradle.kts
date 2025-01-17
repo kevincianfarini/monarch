@@ -1,5 +1,6 @@
 import io.github.frankois944.spmForKmp.definition.SwiftDependency
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import java.net.URI
 
 plugins {
     alias(libs.plugins.android.library)
@@ -49,20 +50,20 @@ kotlin {
 private fun KotlinNativeTarget.configureSpmInterop() {
     compilations {
         val main by getting {
-            cinterops.create("launchdarkly")
+            cinterops.create("swiftlaunchdarkly")
         }
     }
 }
 
 swiftPackageConfig {
-    create("launchdarkly") {
+    create("swiftlaunchdarkly") {
         dependency(
             SwiftDependency.Package.Remote.Version(
-                url = "https://github.com/launchdarkly/ios-client-sdk.git",
-                names = listOf("LaunchDarkly"),
-                packageName = "ios-client-sdk",
+                url = URI("https://github.com/launchdarkly/ios-client-sdk.git"),
                 version = "9.12.0",
-                exportToKotlin = true,
+                products = {
+                    add("LaunchDarkly", exportToKotlin = true)
+                }
             )
         )
     }
