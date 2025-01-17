@@ -10,7 +10,8 @@ jobs:
     strategy:
       matrix:
         os: [ macOS-latest, ubuntu-latest, windows-latest ]
-        job: [allTests]
+        job: [ allTests ]
+
 
     runs-on: ${{matrix.os}}
 
@@ -21,5 +22,5 @@ jobs:
           distribution: 'zulu'
           java-version: 17
 
-      - run: ./gradlew -p . ${{matrix.job}}
+      - run: ./gradlew ${{matrix.job}}
 
