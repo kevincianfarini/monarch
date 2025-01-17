@@ -56,7 +56,8 @@ private fun KotlinNativeTarget.configureSpmInterop() {
     }
 }
 
-if (Os.isFamily(Os.FAMILY_MAC).also { error(it) }) {
+if (Os.isFamily(Os.FAMILY_MAC)) {
+    error("got here")
     swiftPackageConfig {
         create("swiftlaunchdarkly") {
             dependency(
