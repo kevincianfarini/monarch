@@ -1,5 +1,4 @@
 import io.github.frankois944.spmForKmp.definition.SwiftDependency
-import org.apache.tools.ant.taskdefs.condition.Os
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import java.net.URI
 
@@ -56,19 +55,16 @@ private fun KotlinNativeTarget.configureSpmInterop() {
     }
 }
 
-//if (Os.isFamily(Os.FAMILY_MAC)) {
-//    error("got here")
-//    swiftPackageConfig {
-//        create("swiftlaunchdarkly") {
-//            dependency(
-//                SwiftDependency.Package.Remote.Version(
-//                    url = URI("https://github.com/launchdarkly/ios-client-sdk.git"),
-//                    version = "9.12.0",
-//                    products = {
-//                        add("LaunchDarkly", exportToKotlin = true)
-//                    }
-//                )
-//            )
-//        }
-//    }
-//}
+swiftPackageConfig {
+    create("swiftlaunchdarkly") {
+        dependency(
+            SwiftDependency.Package.Remote.Version(
+                url = URI("https://github.com/launchdarkly/ios-client-sdk.git"),
+                version = "9.12.0",
+                products = {
+                    add("LaunchDarkly", exportToKotlin = true)
+                }
+            )
+        )
+    }
+}
