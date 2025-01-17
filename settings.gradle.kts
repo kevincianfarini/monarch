@@ -1,4 +1,4 @@
-import org.gradle.internal.impldep.org.codehaus.plexus.util.Os
+import org.apache.tools.ant.taskdefs.condition.Os
 
 pluginManagement {
     repositories {
