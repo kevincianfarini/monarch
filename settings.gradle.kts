@@ -1,3 +1,5 @@
+import org.gradle.internal.impldep.org.codehaus.plexus.util.Os
+
 pluginManagement {
     repositories {
         mavenCentral()
@@ -12,8 +14,12 @@ include(":compose")
 include(":core")
 include(":integrations")
 include(":integrations:environment-variable")
-include(":integrations:launch-darkly")
 include(":mixins")
 include(":mixins:kotlinx-serialization-json")
 include(":test")
+
+// The SPM4KMP plugin only works on macOS hosts. Optionally include this for now.
+if (Os.isFamily(Os.FAMILY_MAC)) {
+    include(":integrations:launch-darkly")
+}
 
