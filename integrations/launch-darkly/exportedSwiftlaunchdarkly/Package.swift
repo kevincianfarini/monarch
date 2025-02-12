@@ -11,7 +11,7 @@ let package = Package(
       targets: ["exportedSwiftlaunchdarkly"])
   ],
   dependencies: [
-    .package(url: "https://github.com/launchdarkly/ios-client-sdk.git", exact: "9.12.0")
+    .package(url: "https://github.com/launchdarkly/ios-client-sdk.git", exact: "9.12.3")
   ],
   targets: [
     .target(
