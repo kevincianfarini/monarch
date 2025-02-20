@@ -2,6 +2,10 @@ package io.github.kevincianfarini.monarch.launchdarkly
 
 import app.cash.turbine.test
 import io.github.kevincianfarini.monarch.ObservableFeatureFlagDataStore
+import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runTest
 import kotlin.test.*
 
@@ -145,6 +149,18 @@ class LaunchDarklyFeatureFlagDataStoreTest {
             mutate.setVariation("key", 3)
             assertEquals(3L, awaitItem())
         }
+    }
+
+    @Test fun closed_cancelled_channel_does_not_throw() = runTest {
+        val (dataStore, mutate) = sut()
+        val trigger = Channel<Unit>(Channel.RENDEZVOUS)
+        val job = launch {
+            dataStore.observeLong("foo", 1L).launchIn(this)
+            trigger.send(Unit)
+        }
+        trigger.receive()
+        job.cancelAndJoin()
+        mutate.setVariation("foo", 2)
     }
 }
 

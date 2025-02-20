@@ -55,9 +55,9 @@ private class LaunchDarklyFeatureFlagDataStore(
 @OptIn(ExperimentalForeignApi::class)
 private inline fun <reified T : Any> LaunchDarklyClientShim.observeValue(key: String, default: T): Flow<T> {
     return callbackFlow {
-        trySend(getValue<T>(key, default)).getOrThrow()
+        trySend(getValue<T>(key, default))
         val owner = ObserverOwner().pin()
-        observe(key, owner.get()) { trySend(getValue<T>(key, default)).getOrThrow() }
+        observe(key, owner.get()) { trySend(getValue<T>(key, default)) }
         awaitClose {
             stopObserving(owner.get())
             owner.unpin()
