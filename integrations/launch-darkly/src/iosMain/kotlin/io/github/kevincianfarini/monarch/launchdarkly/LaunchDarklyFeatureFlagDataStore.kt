@@ -1,6 +1,5 @@
 package io.github.kevincianfarini.monarch.launchdarkly
 
-import LaunchDarkly.LDClient
 import io.github.kevincianfarini.monarch.ObservableFeatureFlagDataStore
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.pin
@@ -8,25 +7,15 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.conflate
-import LaunchDarkly.LDConfig
-import LaunchDarkly.LDContext
-import platform.Foundation.NSTimeInterval
 
-@Suppress("FunctionName")
-@OptIn(ExperimentalForeignApi::class)
-public fun LaunchDarklyFeatureFlagDataStore(
-    config: LDConfig,
-    context: LDContext,
-    startWaitSeconds: NSTimeInterval = 0.0,
-    completion: ((didTimeOut: Boolean) -> Unit)? = null,
-): ObservableFeatureFlagDataStore {
-    LDClient.startWithConfiguration(config, context, startWaitSeconds, completion)
-    return LaunchDarklyFeatureFlagDataStore(
-        RealLaunchDarklyShim(LDClient.get()!!)
-    )
+/**
+ * Represent this [LaunchDarklyClientShim] as an [ObservableFeatureFlagDataStore].
+ */
+public fun LaunchDarklyClientShim.asFeatureFlagDataStore(): ObservableFeatureFlagDataStore {
+    return LaunchDarklyFeatureFlagDataStore(this)
 }
 
-internal class LaunchDarklyFeatureFlagDataStore(
+private class LaunchDarklyFeatureFlagDataStore(
     private val shim: LaunchDarklyClientShim
 ) : ObservableFeatureFlagDataStore {
 
@@ -81,7 +70,7 @@ private inline fun <reified T : Any> LaunchDarklyClientShim.getValue(key: String
         Boolean::class -> boolVariation(key, default as Boolean) as T
         String::class -> stringVariation(key, default as String) as T
         Double::class -> doubleVariation(key, default as Double) as T
-        Long::class -> longVariation(key, default as Long) as T
+        Long::class -> intVariation(key, (default as Long).toInt()).toLong() as T
         else -> throw IllegalArgumentException("Illegal type for getValue: $clazz")
     }
 }

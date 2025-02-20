@@ -4,6 +4,6 @@ interface MutableLDClientInterface {
     fun setVariation(flagKey: String, value: Boolean)
     fun setVariation(flagKey: String, value: String)
     fun setVariation(flagKey: String, value: Double)
-    fun setVariation(flagKey: String, value: Long)
+    fun setVariation(flagKey: String, value: Int)
 }
 
