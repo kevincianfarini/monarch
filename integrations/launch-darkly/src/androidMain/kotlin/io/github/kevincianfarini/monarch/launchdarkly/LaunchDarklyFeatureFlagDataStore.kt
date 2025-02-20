@@ -45,8 +45,8 @@ private class LaunchDarklyFeatureFlagDataStore(
 
 private inline fun <reified T : Any> LDClientInterface.observeValue(key: String, default: T): Flow<T> {
     return callbackFlow {
-        trySend(getValue<T>(key, default)).getOrThrow()
-        val callback = { key: String -> trySend(getValue<T>(key, default)).getOrThrow() }
+        trySend(getValue<T>(key, default))
+        val callback: (String) -> Unit = { key: String -> trySend(getValue<T>(key, default)) }
         registerFeatureFlagListener(key, callback)
         awaitClose { unregisterFeatureFlagListener(key, callback) }
     }.conflate()
