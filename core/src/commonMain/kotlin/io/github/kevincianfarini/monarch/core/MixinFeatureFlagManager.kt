@@ -1,4 +1,4 @@
-package io.github.kevincianfarini.monarch
+package io.github.kevincianfarini.monarch.core
 
 /**
  * A [FeatureFlagManager] implementation that allows extension via [mixins].

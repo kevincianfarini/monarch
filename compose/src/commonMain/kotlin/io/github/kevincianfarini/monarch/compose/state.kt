@@ -1,9 +1,11 @@
-package io.github.kevincianfarini.monarch
+package io.github.kevincianfarini.monarch.compose
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
+import io.github.kevincianfarini.monarch.core.FeatureFlag
+import io.github.kevincianfarini.monarch.core.ObservableFeatureFlagManager
 
 /**
  * Acquire a [State] of [flag] that updates according to the underlying flag's value. The initial value of the returned

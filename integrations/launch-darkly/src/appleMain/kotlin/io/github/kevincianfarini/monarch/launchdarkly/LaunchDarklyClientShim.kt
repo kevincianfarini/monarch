@@ -1,6 +1,6 @@
 package io.github.kevincianfarini.monarch.launchdarkly
 
-import io.github.kevincianfarini.monarch.ExperimentalMonarchApi
+import io.github.kevincianfarini.monarch.core.ExperimentalMonarchApi
 
 /**
  * A temporary, experimental shim to allow iOS consumers of Monarch to wire their own LDClient

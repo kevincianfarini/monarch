@@ -1,4 +1,4 @@
-package io.github.kevincianfarini.monarch
+package io.github.kevincianfarini.monarch.core
 
 /**
  * An underlying store of raw, primitive feature flag values.

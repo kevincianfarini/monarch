@@ -1,6 +1,6 @@
 package io.github.kevincianfarini.monarch.launchdarkly
 
-import io.github.kevincianfarini.monarch.ObservableFeatureFlagDataStore
+import io.github.kevincianfarini.monarch.core.ObservableFeatureFlagDataStore
 
 actual fun sut(): Pair<ObservableFeatureFlagDataStore, MutableLDClientInterface> {
     val client = FakeLDShim()

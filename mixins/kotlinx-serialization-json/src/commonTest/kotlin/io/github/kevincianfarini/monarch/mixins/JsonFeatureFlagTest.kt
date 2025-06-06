@@ -1,5 +1,6 @@
 package io.github.kevincianfarini.monarch.mixins
 
+import io.github.kevincianfarini.monarch.mixins.kotlinx.serialization.JsonFeatureFlag
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlin.test.Test

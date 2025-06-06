@@ -1,4 +1,4 @@
-package io.github.kevincianfarini.monarch
+package io.github.kevincianfarini.monarch.core
 
 /**
  * Marks declarations that are still **experimental** in Monarch's API, which means that the design of the

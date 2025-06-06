@@ -8,7 +8,7 @@ import com.launchdarkly.sdk.android.FeatureFlagChangeListener
 import com.launchdarkly.sdk.android.LDAllFlagsListener
 import com.launchdarkly.sdk.android.LDClientInterface
 import com.launchdarkly.sdk.android.LDStatusListener
-import io.github.kevincianfarini.monarch.ObservableFeatureFlagDataStore
+import io.github.kevincianfarini.monarch.core.ObservableFeatureFlagDataStore
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Future
 

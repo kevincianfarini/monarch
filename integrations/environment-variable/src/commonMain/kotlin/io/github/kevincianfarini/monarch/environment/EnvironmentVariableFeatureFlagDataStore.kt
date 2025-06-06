@@ -1,6 +1,6 @@
 package io.github.kevincianfarini.monarch.environment
 
-import io.github.kevincianfarini.monarch.FeatureFlagDataStore
+import io.github.kevincianfarini.monarch.core.FeatureFlagDataStore
 
 /**
  * A [FeatureFlagDataStore] implementation that provides values from environment variables.

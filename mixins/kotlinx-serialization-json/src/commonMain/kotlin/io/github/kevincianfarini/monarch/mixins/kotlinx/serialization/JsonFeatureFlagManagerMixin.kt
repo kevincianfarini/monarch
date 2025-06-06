@@ -1,8 +1,8 @@
-package io.github.kevincianfarini.monarch.mixins
+package io.github.kevincianfarini.monarch.mixins.kotlinx.serialization
 
-import io.github.kevincianfarini.monarch.FeatureFlag
-import io.github.kevincianfarini.monarch.FeatureFlagDataStore
-import io.github.kevincianfarini.monarch.FeatureFlagManagerMixin
+import io.github.kevincianfarini.monarch.core.FeatureFlag
+import io.github.kevincianfarini.monarch.core.FeatureFlagDataStore
+import io.github.kevincianfarini.monarch.core.FeatureFlagManagerMixin
 import kotlinx.serialization.json.Json
 
 /**
