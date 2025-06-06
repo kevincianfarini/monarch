@@ -5,7 +5,7 @@ import kotlin.test.*
 class MixinFeatureFlagManagerTest {
 
     @Test fun manager_gets_string_value() {
-        val store = InMemoryFeatureFlagDataStore().apply { setValue("foo", "bar") }
+        val store = InMemoryFeatureFlagDataStore().apply { setString("foo", "bar") }
         assertEquals(
             expected = "bar",
             actual = manager(store).currentValueOf(StringFeature),
@@ -18,14 +18,14 @@ class MixinFeatureFlagManagerTest {
     )
 
     @Test fun manager_gets_boolean_value() {
-        val store = InMemoryFeatureFlagDataStore().apply { setValue("bool", true) }
+        val store = InMemoryFeatureFlagDataStore().apply { setBoolean("bool", true) }
         assertTrue(manager(store).currentValueOf(BooleanFeature))
     }
 
     @Test fun manager_gets_default_boolean_value() = assertFalse(manager().currentValueOf(BooleanFeature))
 
     @Test fun manager_gets_double_value() {
-        val store = InMemoryFeatureFlagDataStore().apply { setValue("double", 15.7) }
+        val store = InMemoryFeatureFlagDataStore().apply { setDouble("double", 15.7) }
         assertEquals(
             expected = 15.7,
             actual = manager(store).currentValueOf(DoubleFeature),
@@ -40,7 +40,7 @@ class MixinFeatureFlagManagerTest {
     )
 
     @Test fun manager_gets_long_value() {
-        val store = InMemoryFeatureFlagDataStore().apply { setValue("long", 27L) }
+        val store = InMemoryFeatureFlagDataStore().apply { setLong("long", 27L) }
         assertEquals(
             expected = 27L,
             actual = manager(store).currentValueOf(LongFeature),
@@ -53,7 +53,7 @@ class MixinFeatureFlagManagerTest {
     )
 
     @Test fun manager_gets_mixin_value() {
-        val store = InMemoryFeatureFlagDataStore().apply { setValue("some_int", "1") }
+        val store = InMemoryFeatureFlagDataStore().apply { setString("some_int", "1") }
         assertEquals(
             expected = 1,
             actual = manager(store, listOf(ObservableIntDecodingMixin)).currentValueOf(IntFeatureFlag),

@@ -26,7 +26,7 @@ class JsonFeatureFlagManagerMixinTest {
 
     @Test fun returns_deserialized_value() {
         val store = InMemoryFeatureFlagDataStore().apply {
-            setValue(
+            setString(
                 key = SomeJsonFlag.key,
                 value = """{"bar":2}""",
             )

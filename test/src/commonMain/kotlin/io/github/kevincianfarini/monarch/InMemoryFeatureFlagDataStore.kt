@@ -38,7 +38,37 @@ public class InMemoryFeatureFlagDataStore : ObservableFeatureFlagDataStore {
         return store.getValue(key, default)
     }
 
-    public fun setValue(key: String, value: Any?) {
+    /**
+     * Set the value associated with [key] to the provided Boolean [value].
+     */
+    public fun setBoolean(key: String, value: Boolean) {
+        store.update { map ->
+            map.plus(key to value)
+        }
+    }
+
+    /**
+     * Set the value associated with [key] to the provided String [value].
+     */
+    public fun setString(key: String, value: String) {
+        store.update { map ->
+            map.plus(key to value)
+        }
+    }
+
+    /**
+     * Set the value associated with [key] to the provided Double [value].
+     */
+    public fun setDouble(key: String, value: Double) {
+        store.update { map ->
+            map.plus(key to value)
+        }
+    }
+
+    /**
+     * Set the value associated with [key] to the provided Long [value].
+     */
+    public fun setLong(key: String, value: Long) {
         store.update { map ->
             map.plus(key to value)
         }
