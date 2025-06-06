@@ -1,6 +1,7 @@
 package io.github.kevincianfarini.monarch.launchdarkly
 
 import com.launchdarkly.sdk.android.LDClientInterface
+import io.github.kevincianfarini.monarch.ExperimentalMonarchApi
 import io.github.kevincianfarini.monarch.ObservableFeatureFlagDataStore
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -10,6 +11,7 @@ import kotlinx.coroutines.flow.conflate
 /**
  * Represent this [LDClientInterface] as an [ObservableFeatureFlagDataStore].
  */
+@ExperimentalMonarchApi
 public fun LDClientInterface.asFeatureFlagDataStore(): ObservableFeatureFlagDataStore {
     return LaunchDarklyFeatureFlagDataStore(this)
 }

@@ -1,11 +1,14 @@
 package io.github.kevincianfarini.monarch.launchdarkly
 
+import io.github.kevincianfarini.monarch.ExperimentalMonarchApi
+
 /**
  * A temporary, experimental shim to allow iOS consumers of Monarch to wire their own LDClient
  * as a data store using [LaunchDarklyClientShim.asFeatureFlagDataStore]. This interface will be
  * removed in future versions of this library when future, first-party support of LaunchDarkly
  * is available.
  */
+@ExperimentalMonarchApi
 public interface LaunchDarklyClientShim {
 
     /**
@@ -44,4 +47,5 @@ public interface LaunchDarklyClientShim {
  * A marker object used in [LaunchDarklyClientShim.observe] and
  * [LaunchDarklyClientShim.stopObserving].
  */
+@ExperimentalMonarchApi
 public class ObserverOwner internal constructor()
