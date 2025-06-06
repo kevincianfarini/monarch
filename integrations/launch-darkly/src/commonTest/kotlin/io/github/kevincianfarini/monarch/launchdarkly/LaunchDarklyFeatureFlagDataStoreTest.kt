@@ -1,7 +1,7 @@
 package io.github.kevincianfarini.monarch.launchdarkly
 
 import app.cash.turbine.test
-import io.github.kevincianfarini.monarch.ObservableFeatureFlagDataStore
+import io.github.kevincianfarini.monarch.core.ObservableFeatureFlagDataStore
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.launchIn

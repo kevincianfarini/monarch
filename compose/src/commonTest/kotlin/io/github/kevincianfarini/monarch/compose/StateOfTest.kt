@@ -1,8 +1,10 @@
-package io.github.kevincianfarini.monarch
+package io.github.kevincianfarini.monarch.compose
 
 import app.cash.molecule.RecompositionMode
 import app.cash.molecule.moleculeFlow
 import app.cash.turbine.test
+import io.github.kevincianfarini.monarch.core.BooleanFeatureFlag
+import io.github.kevincianfarini.monarch.test.InMemoryFeatureFlagManager
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertFalse

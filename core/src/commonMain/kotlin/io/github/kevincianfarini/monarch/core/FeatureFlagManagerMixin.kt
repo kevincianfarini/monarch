@@ -1,4 +1,4 @@
-package io.github.kevincianfarini.monarch
+package io.github.kevincianfarini.monarch.core
 
 /**
  * A supplement to [MixinFeatureFlagManager] that allows extension via [FeatureFlagManagerMixin.currentValueOfOrNull].

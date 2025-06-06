@@ -1,7 +1,14 @@
-package io.github.kevincianfarini.monarch
+package io.github.kevincianfarini.monarch.core
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.update
 
 /**
  * An implementation of [ObservableFeatureFlagDataStore] that allows overriding values produced by [delegate] with

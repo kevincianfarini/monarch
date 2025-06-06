@@ -1,14 +1,16 @@
-package io.github.kevincianfarini.monarch
+package io.github.kevincianfarini.monarch.test
 
 import app.cash.turbine.test
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import io.github.kevincianfarini.monarch.core.LongFeatureFlag
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class FakeFeatureFlagManagerTest {
 
-    @Test fun returns_default_value() {
+    @Test
+    fun returns_default_value() {
         runTest {
             assertEquals(
                 expected = SomeFlag.default,
@@ -17,7 +19,8 @@ class FakeFeatureFlagManagerTest {
         }
     }
 
-    @Test fun returns_explicitly_set_value() {
+    @Test
+    fun returns_explicitly_set_value() {
         runTest {
             val manager = InMemoryFeatureFlagManager().apply {
                 setCurrentValueOf(SomeFlag, 1L)
@@ -29,7 +32,8 @@ class FakeFeatureFlagManagerTest {
         }
     }
 
-    @Test fun observing_returns_default_value() {
+    @Test
+    fun observing_returns_default_value() {
         runTest {
             assertEquals(
                 expected = SomeFlag.default,
@@ -40,7 +44,8 @@ class FakeFeatureFlagManagerTest {
         }
     }
 
-    @Test fun observing_emits_updates_to_flags() {
+    @Test
+    fun observing_emits_updates_to_flags() {
         runTest {
             val manager = InMemoryFeatureFlagManager()
             manager.valuesOf(SomeFlag).test {
@@ -59,6 +64,7 @@ class FakeFeatureFlagManagerTest {
         }
     }
 }
+
 
 private object SomeFlag : LongFeatureFlag(
     key = "some_flag",

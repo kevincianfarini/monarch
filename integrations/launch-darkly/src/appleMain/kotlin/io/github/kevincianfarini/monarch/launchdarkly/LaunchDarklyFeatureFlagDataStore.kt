@@ -1,7 +1,7 @@
 package io.github.kevincianfarini.monarch.launchdarkly
 
-import io.github.kevincianfarini.monarch.ExperimentalMonarchApi
-import io.github.kevincianfarini.monarch.ObservableFeatureFlagDataStore
+import io.github.kevincianfarini.monarch.core.ExperimentalMonarchApi
+import io.github.kevincianfarini.monarch.core.ObservableFeatureFlagDataStore
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.pin
 import kotlinx.coroutines.channels.awaitClose

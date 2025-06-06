@@ -1,12 +1,18 @@
-package io.github.kevincianfarini.monarch
+package io.github.kevincianfarini.monarch.core
 
 import app.cash.turbine.test
+import io.github.kevincianfarini.monarch.test.InMemoryFeatureFlagDataStore
 import kotlinx.coroutines.test.runTest
-import kotlin.test.*
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class ObservableMixinFeatureFlagManagerTest {
 
-    @Test fun manager_gets_string_value() {
+    @Test
+    fun manager_gets_string_value() {
         runTest {
             val store = InMemoryFeatureFlagDataStore().apply { setString("foo", "bar") }
             manager(store).valuesOf(StringFeature).test {
@@ -16,7 +22,8 @@ class ObservableMixinFeatureFlagManagerTest {
         }
     }
 
-    @Test fun manager_gets_default_string_value() {
+    @Test
+    fun manager_gets_default_string_value() {
         runTest {
             manager().valuesOf(StringFeature).test {
                 assertEquals("blah", awaitItem())
@@ -25,7 +32,8 @@ class ObservableMixinFeatureFlagManagerTest {
         }
     }
 
-    @Test fun manager_gets_boolean_value() {
+    @Test
+    fun manager_gets_boolean_value() {
         runTest {
             val store = InMemoryFeatureFlagDataStore().apply { setBoolean("bool", true) }
             manager(store).valuesOf(BooleanFeature).test {
@@ -35,7 +43,8 @@ class ObservableMixinFeatureFlagManagerTest {
         }
     }
 
-    @Test fun manager_gets_default_boolean_value() {
+    @Test
+    fun manager_gets_default_boolean_value() {
         runTest {
             manager().valuesOf(BooleanFeature).test {
                 assertFalse(awaitItem())
@@ -44,7 +53,8 @@ class ObservableMixinFeatureFlagManagerTest {
         }
     }
 
-    @Test fun manager_gets_double_value() {
+    @Test
+    fun manager_gets_double_value() {
         runTest {
             val store = InMemoryFeatureFlagDataStore().apply { setDouble("double", 15.7) }
             manager(store).valuesOf(DoubleFeature).test {
@@ -54,7 +64,8 @@ class ObservableMixinFeatureFlagManagerTest {
         }
     }
 
-    @Test fun manager_gets_default_double_value() {
+    @Test
+    fun manager_gets_default_double_value() {
         runTest {
             manager().valuesOf(DoubleFeature).test {
                 assertEquals(expected = 1.5, actual = awaitItem(), absoluteTolerance = 0.05)
@@ -63,7 +74,8 @@ class ObservableMixinFeatureFlagManagerTest {
         }
     }
 
-    @Test fun manager_gets_long_value() {
+    @Test
+    fun manager_gets_long_value() {
         runTest {
             val store = InMemoryFeatureFlagDataStore().apply { setLong("long", 27L) }
             manager(store).valuesOf(LongFeature).test {
@@ -73,7 +85,8 @@ class ObservableMixinFeatureFlagManagerTest {
         }
     }
 
-    @Test fun manager_gets_default_long_value() {
+    @Test
+    fun manager_gets_default_long_value() {
         runTest {
             manager().valuesOf(LongFeature).test {
                 assertEquals(expected = 1027L, actual = awaitItem())
@@ -82,7 +95,8 @@ class ObservableMixinFeatureFlagManagerTest {
         }
     }
 
-    @Test fun manager_gets_mixin_value() {
+    @Test
+    fun manager_gets_mixin_value() {
         runTest {
             val store = InMemoryFeatureFlagDataStore().apply { setString("some_int", "1") }
             manager(store, listOf(ObservableIntDecodingMixin)).valuesOf(IntFeatureFlag).test {
@@ -92,7 +106,8 @@ class ObservableMixinFeatureFlagManagerTest {
         }
     }
 
-    @Test fun manager_errors_with_unrecognized_flag_type() {
+    @Test
+    fun manager_errors_with_unrecognized_flag_type() {
         runTest {
             // the below IS NOT a `BooleanOption` and therefore will go unrecognized
             val someRandomFlag = object : FeatureFlag<Boolean> {

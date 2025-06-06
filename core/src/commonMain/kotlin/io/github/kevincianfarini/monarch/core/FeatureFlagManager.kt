@@ -1,4 +1,4 @@
-package io.github.kevincianfarini.monarch
+package io.github.kevincianfarini.monarch.core
 
 /**
  * Acquire values from [FeatureFlag] instances.

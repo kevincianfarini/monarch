@@ -1,4 +1,4 @@
-package io.github.kevincianfarini.monarch
+package io.github.kevincianfarini.monarch.core
 
 /**
  * A strongly typed representation of a feature flag that couples a [key], a [default] value, and a data type.

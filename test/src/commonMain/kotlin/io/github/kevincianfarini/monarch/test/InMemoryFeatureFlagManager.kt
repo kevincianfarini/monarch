@@ -1,5 +1,7 @@
-package io.github.kevincianfarini.monarch
+package io.github.kevincianfarini.monarch.test
 
+import io.github.kevincianfarini.monarch.core.FeatureFlag
+import io.github.kevincianfarini.monarch.core.ObservableFeatureFlagManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map

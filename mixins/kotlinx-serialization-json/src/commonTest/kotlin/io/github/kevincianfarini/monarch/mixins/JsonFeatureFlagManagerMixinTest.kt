@@ -1,7 +1,8 @@
 package io.github.kevincianfarini.monarch.mixins
 
-import io.github.kevincianfarini.monarch.BooleanFeatureFlag
-import io.github.kevincianfarini.monarch.InMemoryFeatureFlagDataStore
+import io.github.kevincianfarini.monarch.core.BooleanFeatureFlag
+import io.github.kevincianfarini.monarch.test.InMemoryFeatureFlagDataStore
+import io.github.kevincianfarini.monarch.mixins.kotlinx.serialization.JsonFeatureFlagManagerMixin
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
 import kotlin.test.assertEquals
