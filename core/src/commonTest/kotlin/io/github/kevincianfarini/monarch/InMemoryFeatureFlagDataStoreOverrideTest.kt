@@ -29,10 +29,15 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
     ) {
         val key = "foo"
         val delegate = InMemoryFeatureFlagDataStore().apply { setValue(key, delegateValue) }
-        val storeOverride = storeOverride(
-            initialOverrides = mapOf(key to overrideValue),
-            delegate = delegate,
-        )
+        val storeOverride = InMemoryFeatureFlagDataStoreOverride(delegate = delegate).apply {
+            when (overrideValue) {
+                is String -> setString(key, overrideValue)
+                is Boolean -> setBoolean(key, overrideValue)
+                is Long -> setLong(key, overrideValue)
+                is Double -> setDouble(key, overrideValue)
+                else -> error("Invalid value.")
+            }
+        }
 
         assertEquals(
             expected = overrideValue,
@@ -57,7 +62,7 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
     ) {
         val key = "foo"
         val delegate = InMemoryFeatureFlagDataStore().apply { setValue(key, delegateValue) }
-        val storeOverride = storeOverride(delegate = delegate)
+        val storeOverride = InMemoryFeatureFlagDataStoreOverride(delegate = delegate)
 
         assertEquals(
             expected = delegateValue,
@@ -83,10 +88,15 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
     ) = runTest {
         val key = "foo"
         val delegate = InMemoryFeatureFlagDataStore().apply { setValue(key, delegateValue) }
-        val storeOverride = storeOverride(
-            initialOverrides = mapOf(key to overrideValue),
-            delegate = delegate,
-        )
+        val storeOverride = InMemoryFeatureFlagDataStoreOverride(delegate).apply {
+            when (overrideValue) {
+                is String -> setString(key, overrideValue)
+                is Boolean -> setBoolean(key, overrideValue)
+                is Long -> setLong(key, overrideValue)
+                is Double -> setDouble(key, overrideValue)
+                else -> error("Invalid value.")
+            }
+        }
 
         storeOverride.produceFlow(key).test {
             assertEquals(
@@ -113,7 +123,7 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
     ) = runTest {
         val key = "foo"
         val delegate = InMemoryFeatureFlagDataStore().apply { setValue(key, delegateValue) }
-        val storeOverride = storeOverride(delegate = delegate)
+        val storeOverride = InMemoryFeatureFlagDataStoreOverride(delegate = delegate)
 
         storeOverride.produceFlow(key).test {
             assertEquals(
@@ -140,7 +150,15 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
         produceFlow: InMemoryFeatureFlagDataStoreOverride.(String) -> Flow<*>
     ) = runTest {
         val key = "foo"
-        val storeOverride = storeOverride(initialOverrides = mapOf(key to initialValue))
+        val storeOverride = InMemoryFeatureFlagDataStoreOverride(InMemoryFeatureFlagDataStore()).apply {
+            when (initialValue) {
+                is String -> setString(key, initialValue)
+                is Boolean -> setBoolean(key, initialValue)
+                is Long -> setLong(key, initialValue)
+                is Double -> setDouble(key, initialValue)
+                else -> error("Invalid value.")
+            }
+        }
         storeOverride.produceFlow(key).test {
             assertEquals(
                 expected = initialValue,
@@ -150,9 +168,4 @@ class InMemoryFeatureFlagDataStoreOverrideTest {
             assertNotEquals(illegal = initialValue, actual = awaitItem())
         }
     }
-
-    private fun storeOverride(
-        initialOverrides: Map<String, Any> = emptyMap(),
-        delegate: ObservableFeatureFlagDataStore = InMemoryFeatureFlagDataStore()
-    ) = InMemoryFeatureFlagDataStoreOverride(delegate, initialOverrides)
 }

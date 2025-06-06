@@ -16,14 +16,9 @@ public class InMemoryFeatureFlagDataStoreOverride(
      * The underlying data store which this class overrides.
      */
     private val delegate: ObservableFeatureFlagDataStore,
-
-    /**
-     * The initial map of overrides, keyed by a feature flag's key.
-     */
-    initialOverrides: Map<String, Any> = emptyMap()
 ) : ObservableFeatureFlagDataStore {
 
-    private val cache: MutableStateFlow<Map<String, Any>> = MutableStateFlow(initialOverrides)
+    private val cache: MutableStateFlow<Map<String, Any>> = MutableStateFlow(emptyMap())
 
     public override fun getBoolean(key: String, default: Boolean): Boolean {
         return cache.getCachedValue<Boolean>(key) ?: delegate.getBoolean(key, default)
