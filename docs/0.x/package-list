@@ -2,14 +2,14 @@ $dokka.format:html-v1
 $dokka.linkExtension:html
 
 module:compose
-io.github.kevincianfarini.monarch
+io.github.kevincianfarini.monarch.compose
 module:core
-io.github.kevincianfarini.monarch
+io.github.kevincianfarini.monarch.core
 module:test
-io.github.kevincianfarini.monarch
+io.github.kevincianfarini.monarch.test
 module:environment-variable
 io.github.kevincianfarini.monarch.environment
 module:launch-darkly
 io.github.kevincianfarini.monarch.launchdarkly
 module:kotlinx-serialization-json
-io.github.kevincianfarini.monarch.mixins
+io.github.kevincianfarini.monarch.mixins.kotlinx.serialization
