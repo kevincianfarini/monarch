@@ -1,5 +1,6 @@
 package io.github.kevincianfarini.monarch.launchdarkly
 
+import io.github.kevincianfarini.monarch.ExperimentalMonarchApi
 import io.github.kevincianfarini.monarch.ObservableFeatureFlagDataStore
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.pin
@@ -11,10 +12,12 @@ import kotlinx.coroutines.flow.conflate
 /**
  * Represent this [LaunchDarklyClientShim] as an [ObservableFeatureFlagDataStore].
  */
+@ExperimentalMonarchApi
 public fun LaunchDarklyClientShim.asFeatureFlagDataStore(): ObservableFeatureFlagDataStore {
     return LaunchDarklyFeatureFlagDataStore(this)
 }
 
+@ExperimentalMonarchApi
 private class LaunchDarklyFeatureFlagDataStore(
     private val shim: LaunchDarklyClientShim
 ) : ObservableFeatureFlagDataStore {
@@ -53,6 +56,7 @@ private class LaunchDarklyFeatureFlagDataStore(
 }
 
 @OptIn(ExperimentalForeignApi::class)
+@ExperimentalMonarchApi
 private inline fun <reified T : Any> LaunchDarklyClientShim.observeValue(key: String, default: T): Flow<T> {
     return callbackFlow {
         trySend(getValue<T>(key, default))
@@ -65,6 +69,7 @@ private inline fun <reified T : Any> LaunchDarklyClientShim.observeValue(key: St
     }.conflate()
 }
 
+@ExperimentalMonarchApi
 private inline fun <reified T : Any> LaunchDarklyClientShim.getValue(key: String, default: T): T {
     return when (val clazz = T::class) {
         Boolean::class -> boolVariation(key, default as Boolean) as T
