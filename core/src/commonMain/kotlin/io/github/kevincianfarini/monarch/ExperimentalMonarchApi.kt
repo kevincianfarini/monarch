@@ -1,0 +1,28 @@
+package io.github.kevincianfarini.monarch
+
+/**
+ * Marks declarations that are still **experimental** in Monarch's API, which means that the design of the
+ * corresponding declarations has open issues which may (or may not) lead to their changes in the future.
+ * Roughly speaking, there is a chance that those declarations will be deprecated in the near future or
+ * the semantics of their behavior may change in some way that may break some code.
+ */
+@MustBeDocumented
+@Retention(value = AnnotationRetention.BINARY)
+@Target(
+    AnnotationTarget.CLASS,
+    AnnotationTarget.ANNOTATION_CLASS,
+    AnnotationTarget.PROPERTY,
+    AnnotationTarget.FIELD,
+    AnnotationTarget.LOCAL_VARIABLE,
+    AnnotationTarget.VALUE_PARAMETER,
+    AnnotationTarget.CONSTRUCTOR,
+    AnnotationTarget.FUNCTION,
+    AnnotationTarget.PROPERTY_GETTER,
+    AnnotationTarget.PROPERTY_SETTER,
+    AnnotationTarget.TYPEALIAS
+)
+@RequiresOptIn(
+    message = "This API is experimental and might change in the future.",
+    level = RequiresOptIn.Level.WARNING,
+)
+public annotation class ExperimentalMonarchApi
