@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+
 plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.kotlin.compose)
@@ -13,6 +15,19 @@ kotlin {
     iosSimulatorArm64()
     iosX64()
     jvm()
+    js {
+        nodejs {
+            testTask {
+                useMocha {
+                    timeout = "5s"
+                }
+            }
+        }
+    }
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        nodejs()
+    }
     linuxArm64()
     linuxX64()
     macosArm64()

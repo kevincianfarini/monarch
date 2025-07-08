@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+
 plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.kotlin.multiplatform)
@@ -20,6 +22,10 @@ kotlin {
                 }
             }
         }
+    }
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        nodejs()
     }
     linuxArm64()
     linuxX64()
