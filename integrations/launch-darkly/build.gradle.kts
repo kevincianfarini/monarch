@@ -18,7 +18,6 @@ android {
 
 kotlin {
     explicitApi()
-    jvmToolchain(17)
 
     iosArm64()
     iosSimulatorArm64()
